@@ -1,0 +1,36 @@
+.form-wrapper{
+    border:2px solid black;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
+.custom-input:focus {
+    border-color:grey !important; 
+    box-shadow: 0 0 0 0.2rem rgba(0,0,0,0.2); 
+    outline: none; 
+  }
+  .auth-button{
+    border-top-left-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+    background: rgba(0,0,0,0.3);
+    border:none
+  }
+
+  .line-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 0 20px;
+  }
+  
+  .line {
+    flex: 1;
+    height: 1px;
+    background-color: #000;
+  }
+  

@@ -1,0 +1,117 @@
+.header{
+    position: relative;
+    height: 30rem;
+}
+
+.header-background {
+    background-image: url('../assets/images/header-background.avif');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    width: 100%;
+    height: 100%; 
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    color: white; 
+  }
+
+  .break {
+    display: block;
+  }
+  
+  .home-searchbar {
+    width: 50%;
+    max-width: 50%;
+  }
+  
+  @media (max-width: 992px) { /* Medium screens and smaller */
+    .home-searchbar {
+      width: 80%;
+      max-width: 80%;
+    }
+  }
+
+  .firstListingCard {
+    background-image: url('../assets/images/firstListing.jpeg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    width: 100%;
+    height: 100%; 
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    color: white; 
+  }
+  .secondListingCard {
+    background-image: url('../assets/images/secondListing.jpeg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    width: 100%;
+    height: 100%; 
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    color: white; 
+  }
+  .thirdListingCard {
+    background-image: url('../assets/images/thirdListing.jpeg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    width: 100%;
+    height: 100%; 
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    color: white; 
+  }
+
+  .fourthListingCard {
+    background-image: url('../assets/images/landListing.jpeg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    width: 100%;
+    height: 100%; 
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    color: white; 
+  }
+
+  .categoryList-padding{
+    padding-top: 2cm;
+  }
+  div .listingCard{
+    height: 4cm;
+    position: relative;
+
+  }
+  .listingCardCount{
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-weight: bold;
+    background-color: white;
+    border-radius: 50%;
+    width:3rem;
+    height:3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .listingCardTitle{
+    position: absolute;
+    top: 0;
+    left: 15%;
+    font-weight: bold;
+    background:rgba(250, 250, 250, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:1rem
+
+  }

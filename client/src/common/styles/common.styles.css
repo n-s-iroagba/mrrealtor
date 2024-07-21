@@ -1,0 +1,19 @@
+.logo {
+    width:3cm;
+    height: 1.5cm;
+    @media(min-width: 15cm){
+        width: 4.5cm;
+    }
+}
+.navbar{
+    position: absolute;
+    top:0;
+    height:4rem
+}
+.curved-button{
+    border:2px solid black;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom-left-radius:1rem ;
+    border-bottom-right-radius: 1rem;
+}
