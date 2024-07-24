@@ -10,6 +10,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import ErrorMessage from '../../../common/components/ErrorMessage';
 import PasswordStrengthMeter from '../components/PasswordStrengthMeter';
 import { AuthContext } from '../context/AuthContext';
+import { changePasswordTokenKey } from '../../../constants/tokenKeys';
 
 const PasswordForm: React.FC = ()=>{
   const navigate = useNavigate()
@@ -17,7 +18,7 @@ const PasswordForm: React.FC = ()=>{
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token')
     if (token) {
-      localStorage.setItem("cassockChangePasswordToken", token);
+      localStorage.setItem(changePasswordTokenKey, token);
     }else{
       alert('You are not authorised to view this page')
       navigate('/login')

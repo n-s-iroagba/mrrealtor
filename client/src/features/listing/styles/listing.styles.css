@@ -1,16 +1,27 @@
-.listing-button{
+.contact-button{
     border-top-left-radius:2rem ;
     border-top-right-radius: 2rem;
     border-bottom-left-radius: 2rem;
     border-bottom-right-radius:2rem ;
     border: none !important;
     color:white;
-    background-color: deepskyblue;
+    
+
+}
+
+.share-button{
+  border-top-left-radius:2rem ;
+  border-top-right-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius:2rem ;
+  color:white;
+  
 
 }
 .listing-icon{
 color: deepskyblue;
 }
+
 .form-wrapper{
     border:2px solid black;
     border-top-left-radius: 1rem;
@@ -40,9 +51,15 @@ color: deepskyblue;
     max-width: 600px;
     padding: 0 20px;
   }
+  div .accordion-item{
+    box-shadow: none;
+    --bs-accordion-btn-focus-box-shadow: none;
+    --bs-accordion-active-color:none;
+    --bs-accordion-active-bg:none;
+  }
+ 
   
   .line {
-    flex: 1;
     height: 1px;
     background-color: #000;
   }

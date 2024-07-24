@@ -21,8 +21,9 @@ import {
 
 import { extractErrorCode } from "../../../common/utils/utils";
 
-import { decodeChangePasswordToken, getLoginDecodedToken } from "../helpers/helper";
+import { decodeChangePasswordToken, getLoginDecodedToken } from "../helpers/helpers";
 import { loginUrl, newPasswordRoute } from "../../../constants/constants";
+import { changePasswordTokenKey, LoginTokenKey, verificationTokenKey } from "../../../constants/tokenKeys";
 
 
 export const AuthContext = createContext<AuthContextType | undefined>(
@@ -125,7 +126,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
 
   function handleEmailVerification(response: any,shouldReload:boolean=false,navigate:(path:string)=>void): void {
     localStorage.setItem(
-        "cassockEmailVerificationToken",
+        verificationTokenKey,
         JSON.stringify(response.data)
        
     );
@@ -202,7 +203,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
       return;
     }
 
-    const token = localStorage.getItem("cassockChangePasswordToken");
+    const token = localStorage.getItem(changePasswordTokenKey);
     const decodedToken = getIdFromChangePasswordToken(token)
 
     if (
@@ -222,7 +223,7 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
         token
       );
       if (response.status === 200) {
-        localStorage.setItem("cassockJwtToken", JSON.stringify(response.data));
+        localStorage.setItem(LoginTokenKey, JSON.stringify(response.data));
         navigate(
           decodedToken.role === Role.ADMIN ? "/admin/dashboard" : "/dashboard"
         );
@@ -287,7 +288,7 @@ const handleLoginResponse = (response: any, navigate: (path: string) => void) =>
   };
 
   const handleSuccessfulLogin = (token:string,navigate:(path:string)=>void) => {
-    localStorage.setItem('cassockJwtToken', JSON.stringify(token));
+    localStorage.setItem(LoginTokenKey, JSON.stringify(token));
     const role  = getLoginDecodedToken()?.role
     const destination = role === Role.REALTOR ? '/dashboard' : '/admin/dashboard';
     navigate(destination);

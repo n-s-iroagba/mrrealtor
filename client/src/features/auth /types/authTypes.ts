@@ -47,6 +47,8 @@ export interface LoginData{
   password: string;
   email: string;
 }
+
+export type UserData =AdminData| RealtorData
 export interface AuthContextType {
     adminData:AdminData
     newPasswordData:NewPasswordData,

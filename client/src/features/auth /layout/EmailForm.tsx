@@ -9,6 +9,7 @@ import '../styles/auth.styles.css'
 import ErrorMessage from '../../../common/components/ErrorMessage';
 import { requestNewPasswordUrl } from '../../../constants/constants';
 import { postData } from '../../../common/utils/apiUtils';
+import { changePasswordTokenKey } from '../../../constants/tokenKeys';
 
 const EmailForm :React.FC = () => {
   const [validated, setValidated] = useState<boolean>(false)
@@ -34,7 +35,7 @@ const EmailForm :React.FC = () => {
         const response = await postData(requestNewPasswordUrl, { email: email })
         console.log(response)
         if (response.status === 200) {
-          localStorage.setItem('cassockPasswordChangeToken', response.data)
+          localStorage.setItem(changePasswordTokenKey, response.data)
           navigate('/reset-password-info')
         } else if (response.status === 404) {
           setErrorMessage('user with this email not found')

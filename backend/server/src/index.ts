@@ -1,60 +1,65 @@
-// src/server.ts
+
 import express from 'express';
 import http from 'http';
 import { Server as SocketIOServer } from 'socket.io';
 import cors from 'cors';
+import initializeSockets from './sockets';
+import sequelize from './config/orm_setup';
+import router from './router/router';
+
 
 const app = express();
 app.use(cors());
 
 const server = http.createServer(app);
-const io = new SocketIOServer(server, {
-  cors: {
-    origin: '*', // Adjust this to your client's origin
-  },
-});
 
-interface Client {
-  id: string;
-}
+initializeSockets(server);
 
-const clients: Record<string, Client> = {};
-
-io.on('connection', (socket) => {
-  console.log('New client connected');
-
-  socket.on('register', (data) => {
-    const { id } = data;
-    clients[socket.id] = { id };
-    console.log(`Client registered with id: ${id}`);
-  });
-
-  socket.on('message', (message) => {
-    console.log('received: %s', message);
-
-    const parsedMessage = JSON.parse(message);
-    const { to, content } = parsedMessage;
-
-    const recipientSocketId = Object.keys(clients).find(
-      (key) => clients[key].id === to
-    );
-
-    if (recipientSocketId) {
-      io.to(recipientSocketId).emit('message', JSON.stringify({ from: clients[socket.id].id, content }));
-    }
-  });
-
-  socket.on('disconnect', () => {
-    delete clients[socket.id];
-    console.log('Client disconnected');
-  });
-});
-
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
   res.send('Socket.io server is running');
 });
+app.use('/messages/:id',router)
+app.use('/admins/:id', router);
+
+
+app.use('/realtors', router);
+
+app.use('/realtors', router);
+
+app.use('/realtors/:id', router);
+
+app.use('/realtors/:id', router);
+
+app.use('/realtors/:id', router);
+
+app.use('/likes', router)
+
+app.use('/all-likes', router)
+
+
+app.use('/properties', router);
+
+
+app.use('/properties', router);
+
+
+app.use('/properties/:id', router);
+
+app.use('/properties/:realtorId',router);
+
+
+app.use('/properties/:id', router);
+
+app.use('/properties/:id', router)
 
 const PORT = 4000;
+sequelize
+  .sync({
+    alter:true,
+  force:true
+  })
+  .then(() => console.log('models formed'))
+  .catch((err:any) => console.log(err));
 server.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });

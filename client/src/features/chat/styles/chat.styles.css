@@ -33,3 +33,27 @@
     border: 1px solid #ccc;
   }
   
+  .chat-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .message-preview {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .message-text {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .message-status {
+    font-size: 14px;
+    color: #999;
+  }
+  

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react'
 import { Card, Image } from 'react-bootstrap';
 import '../styles/listing.styles.css'
+import {ContactRealtorButton, CopyLinkButton} from './Buttons';
 
 
 const SearchListingCard:React.FC<{propertyType:string,numberOfRooms?:number,address:string,bestAmmenity:string,otherAmmenity:string,cost:number,image:any}> = ({
@@ -24,7 +25,8 @@ return<div><Card  className=' px-2 pt-2'>
         {address}
 
     </div>
-    <button className='listing-button px-2'>contact agent</button>
+    <ContactRealtorButton backgroundColor={'bg-primary'}/>
+    
 </div>
 </Card>
 </div>
