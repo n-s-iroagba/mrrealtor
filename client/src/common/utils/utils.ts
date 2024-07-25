@@ -10,7 +10,7 @@ type ReadableItem = {
     return mediaQuery.matches;
   }
 
-  export function countUnreadItems(items:ReadableItem[]) {
+  export function countUnreadItems(items:ReadableItem[]):number {
     let unreadCount = 0;
     
     for (const item of items) {
@@ -22,7 +22,7 @@ type ReadableItem = {
     return unreadCount;
   }
 
-  export function extractErrorCode(errorMessage:string) {
+  export function extractErrorCode(errorMessage:string):number|null {
     const regex = /status code (\d+)/;
     const match = errorMessage.match(regex); 
     if (match && match.length > 1) {
@@ -40,7 +40,7 @@ type ReadableItem = {
     return false;
   };
 
-  export const numberWithCommas = (number: number) => {
+  export const numberWithCommas = (number: number):string => {
     const str = String(number);
     let formatted = '';
   

@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { LoginTokenKey } from '../../constants/tokenKeys';
+import { changePasswordTokenKey, LoginTokenKey } from '../../constants/tokenKeys';
 const authorizationData = localStorage.getItem(LoginTokenKey)
 export const postData = async (url: string, data: any) => {
  
@@ -21,8 +21,9 @@ export const postData = async (url: string, data: any) => {
   }
 };
 //authData(token) is passed in at call
-export const postChangePasswordData = async (url: string, data: any,authorizationData:string) => {
- 
+export const postChangePasswordData = async (url: string, data: any) => {
+  const authorizationData = localStorage.getItem(changePasswordTokenKey)
+
    
   const headers: { [key: string]: string } = {
     'Content-Type': 'application/json',

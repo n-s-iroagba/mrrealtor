@@ -1,10 +1,10 @@
-export type LoginTokenType = {
+export type LoginToken = {
   id:number
   role:Role
 
 }
 
-export type VerificationTokenType = {
+export type VerificationToken = {
 id:number
 role:Role
 
@@ -76,6 +76,6 @@ export interface AuthContextType {
     loginData:LoginData
     handleSubmitForLogin : (event:React.FormEvent<HTMLFormElement>,navigate:(path:string)=>void)=>void
     handleChangeForLogin :(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,navigate:(path:string)=>void)=>void
-    handleEmailVerification:(response: any,shouldReload:boolean,navigate:(path:string)=>void)=>void
+  
    
   }

@@ -15,15 +15,16 @@ import {
   AuthContextType,
   RealtorData,
   LoginData,
-  NewPasswordData,
-  ChangePasswordToken, Role
+  NewPasswordData
 } from "../types/authTypes";
 
 import { extractErrorCode } from "../../../common/utils/utils";
 
-import { decodeChangePasswordToken, getLoginDecodedToken } from "../helpers/helpers";
+import { getIdFromChangePasswordToken, handleEmailVerification, handleLoginError, handleLoginResponse, handleSuccessfulLogin, handleValidation, validateSecretCode } from "../helpers/helpers";
 import { loginUrl, newPasswordRoute } from "../../../constants/constants";
-import { changePasswordTokenKey, LoginTokenKey, verificationTokenKey } from "../../../constants/tokenKeys";
+import { AxiosResponse } from "axios";
+import { validatePassword } from "../util/util";
+import { notAuthorisedErrorMessage } from "../../../constants/errorMessages";
 
 
 export const AuthContext = createContext<AuthContextType | undefined>(
@@ -74,65 +75,40 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     navigate:(path:string)=>void
   ) => {
     event.preventDefault();
-    console.log(data)
-    const form = event.currentTarget;
-    const secretCodeMatch =
-      "secretCode" in data
-        ? data.secretCode === process.env.REACT_APP_ADMIN_SECRET_KEY
-        : true;
     setValidated(true)
-    if (
-      form.checkValidity() === false ||
-      passwordValidityMessage.length ||
-      !isMatchingPassword ||
-      !secretCodeMatch
+    const form = event.currentTarget;
 
-    ) {
-
-      if ("secretCode" in data && !secretCodeMatch) {
-        setErrorMessage("The secret code provided is wrong.");
-      }else{
-        setErrorMessage("Please fill in all fields and ensure passwords match.");
-      }
-
+    const secretCodeMatch:boolean = validateSecretCode(data)
+  
+    const error:string|null = handleValidation(form,passwordValidityMessage,isMatchingPassword,secretCodeMatch);
+    if(error){
+      setErrorMessage(error)
       return;
     }
 
     setSubmitting(true);
     try {
-      const response = await postData(domain, data);
+      const response:AxiosResponse<string> = await postData(domain, data);
       if (response.status === 201) {
-       handleEmailVerification(response,false,navigate)
+       handleEmailVerification(response,'navigate',navigate)
       }
-      if (response.status === 409) {
-        setErrorMessage("This email is already registered");
-        return;
-      } else {
-        setErrorMessage("Something went wrong, please try again later");
-      }
+      
     } catch (error: any) {
       console.error(error);
-      const code = extractErrorCode(error.message);
+      const code:number|null = extractErrorCode(error.message);
+
       if (code === 409) {
       setErrorMessage('user with this email already exists')
-
-       }else {
-        setErrorMessage('Our server is currently down. Please try again later.');
+      return ;
       }
+      setErrorMessage('Our server is currently down. Please try again later.');
+      
     } finally {
       setSubmitting(false);
     }
   };
 
-  function handleEmailVerification(response: any,shouldReload:boolean=false,navigate:(path:string)=>void): void {
-    localStorage.setItem(
-        verificationTokenKey,
-        JSON.stringify(response.data)
-       
-    );
-    console.log(response)
-    shouldReload?window.location.reload(): navigateToVerifyEmailPage(navigate);
-}
+
   const handleChange = (
     data: AdminData | RealtorData | NewPasswordData,
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -148,27 +124,11 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     if (
       e.target.name === 'password'
     ) {
-      validatePassword(e.target.value);
+     setPasswordValidityMessage( validatePassword(e.target.value));
     }
   };
 
-  const validatePassword = (password: string) => {
-    const tempPasswordState: string[] = [];
-    const hasNumber = /\d/.test(password);
-    const hasUppercase = /[A-Z]/.test(password);
-    const hasLowercase = /[a-z]/.test(password);
-    const length = password.length;
 
-    if (!hasNumber) tempPasswordState.push("no number in password provided");
-    if (!hasUppercase)
-      tempPasswordState.push("no uppercase letter in password provided");
-    if (!hasLowercase)
-      tempPasswordState.push("no lowercase letter in password provided");
-    if (length < 8)
-      tempPasswordState.push("password is less than 8 characters");
-
-    setPasswordValidityMessage(tempPasswordState);
-  };
 
   const handleConfirmPasswordsChange = (
     data: AdminData | RealtorData | NewPasswordData,
@@ -195,39 +155,29 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     setValidated(false);
 
 
-    if (
-      form.checkValidity() === false ||
-      passwordValidityMessage.length ||
-      !isMatchingPassword
-    ) {
+    const error:string|null = handleValidation(form,passwordValidityMessage,isMatchingPassword);
+    if(error){
+      setErrorMessage(error)
       return;
     }
 
-    const token = localStorage.getItem(changePasswordTokenKey);
-    const decodedToken = getIdFromChangePasswordToken(token)
 
-    if (
-      decodedToken && token
-    ){
-      
-      setSubmitting(true);
-    }else{
-      setErrorMessage('Your are not authorised to make this request')
+    const id: number|null = getIdFromChangePasswordToken()
+
+    if (!id){
+      setErrorMessage(notAuthorisedErrorMessage)
       return;
     }
- 
+    setSubmitting(true);
     try {
-      const response = await postChangePasswordData(
-        `${newPasswordRoute}/${decodedToken.id}`,
-        {password:data.password},
-        token
+      const response:AxiosResponse<string> = await postChangePasswordData(
+        `${newPasswordRoute}/${id}`,
+        {password:data.password},        
       );
       if (response.status === 200) {
-        localStorage.setItem(LoginTokenKey, JSON.stringify(response.data));
-        navigate(
-          decodedToken.role === Role.ADMIN ? "/admin/dashboard" : "/dashboard"
-        );
+        handleSuccessfulLogin(response.data,navigate)
       }
+
     } catch (error: any) {
       console.error(error);
       alert("An error occurred, kindly try again later");
@@ -236,18 +186,6 @@ export const AuthContextProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
-  const getIdFromChangePasswordToken = (token: string | null):ChangePasswordToken|null => {
-    let decodedToken: ChangePasswordToken | null = token
-      ? decodeChangePasswordToken(token)
-      : null;
-
-    if (
-      !token || !decodedToken
-    ) {
-      setErrorMessage("You are not authorized to make this request");
-    }
-    return decodedToken
-  }
 
 
 const handleChangeForLogin =(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>{
@@ -278,38 +216,6 @@ const handleChangeForLogin =(e: ChangeEvent<HTMLInputElement | HTMLTextAreaEleme
     }
   };
 
-const handleLoginResponse = (response: any, navigate: (path: string) => void) => {
-    if (response.status === 200) {
-      handleSuccessfulLogin(response.data,navigate);
-    }
-    else if (response.status === 201) {
-      handleEmailVerification(response,false,navigate);
-    }
-  };
-
-  const handleSuccessfulLogin = (token:string,navigate:(path:string)=>void) => {
-    localStorage.setItem(LoginTokenKey, JSON.stringify(token));
-    const role  = getLoginDecodedToken()?.role
-    const destination = role === Role.REALTOR ? '/dashboard' : '/admin/dashboard';
-    navigate(destination);
-  };
-  
-  const handleLoginError = (error:any) => {
-    console.error(error);
-    const code = extractErrorCode(error.message);
-    
-    if (code === 403) {
-      setErrorMessage('Invalid password.');
-    } else if (code === 404) {
-      setErrorMessage('You are not yet registered on our platform.');
-    } else {
-      setErrorMessage('Our server is currently down. Please try again later.');
-    }
-  };
-
-  const navigateToVerifyEmailPage = (navigate:(path:string)=>void) => {
-    navigate('/verify-email')
-  }
   
   const authContextValue: AuthContextType = {
     setAdminData,
@@ -334,8 +240,6 @@ const handleLoginResponse = (response: any, navigate: (path: string) => void) =>
     setNewPasswordData,
     handleSubmitForChangePassword,
     handleChangeForLogin,
-    handleEmailVerification,
-
   };
 
   return (
@@ -344,3 +248,5 @@ const handleLoginResponse = (response: any, navigate: (path: string) => void) =>
     </AuthContext.Provider>
   );
 };
+  
+
