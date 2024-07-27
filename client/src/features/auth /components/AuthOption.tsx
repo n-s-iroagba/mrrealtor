@@ -1,8 +1,11 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import googleLogo from '../../../assets/logo/blacklogo.png'
+import '../styles/auth.styles.css'
 
 
-export const AuthOption: React.FC<{
+
+const AuthOption: React.FC<{
     route: string;
     title: string;
     buttonText: string;
@@ -16,9 +19,30 @@ export const AuthOption: React.FC<{
               <p className='mt-3 W-50'>{title}</p>
               <div className="line-container">
               <div className="line"></div>
-                <button onClick={() => navigate(`/${route}`)} className='authOption-button'>
-                  <small>{buttonText}</small>
+                <button onClick={() => navigate(`/${route}`)} className='authOption-button py-2 px-2'>
+                  {buttonText}
                 </button>
+                <div className="line"></div>
+                </div>
+            </div>
+        
+    );
+  };
+
+  export const GoogleButton: React.FC = () => {
+
+  
+    return (
+     
+            <div className='w-100 d-flex flex-column align-items-center mb-5 '>
+              <p className='mt-3 W-50'>Gain Access with Google.</p>
+              <div className="line-container">
+              <div className="line"></div>
+               <a>
+                <button className='authOption-button'>
+                  <img className='w-100' src ={googleLogo} alt='google-icon'/>
+                </button>
+                </a>
                 <div className="line"></div>
                 </div>
             </div>

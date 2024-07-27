@@ -1,0 +1,12 @@
+.realtor-picture {
+    /* Adjust the size of the circular image */
+    width: 5rem; /* or any size you prefer */
+    height: 5rem; /* or any size you prefer */
+  }
+  
+  .realtor-picture img {
+    /* Ensure the image is circular */
+    border-radius: 50%;
+    object-fit: cover; /* Ensures the image covers the circle without distortion */
+  }
+  

@@ -1,12 +1,12 @@
 
-
 import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model, NonAttribute } from 'sequelize';
 import sequelize from '../config/orm_setup';
 import { Property } from '../property/Property.Model';
-
-
-
-
+import { Chat } from '../chat/Chat.Model';
+import { RealtorProperty } from '../realtorProperty/RealtorProperty.Model';
+// import { RealtorProperty } from '../realtorProperty/RealtorProperty.Model';
+// import { Message } from '../message/Message.Model';
+// import { Chat } from '../chat/Chat.Model';
 
 
 
@@ -30,6 +30,8 @@ declare changePasswordToken: string | null;
 
 declare properties?: NonAttribute<Property[]>;
 }
+
+
 
 Realtor.init(
   {
@@ -86,7 +88,10 @@ Realtor.init(
   },
   { sequelize, modelName: 'realtors' }
 );
-
+Realtor.belongsToMany(Property, { through: RealtorProperty, foreignKey: 'realtorId' })
+Realtor.hasMany(Property, { foreignKey: 'posterId' })
+ Realtor.hasMany(Chat, { foreignKey: 'clientId' })
+Realtor.hasMany(Chat, { foreignKey: 'realtorId' })
 
 
 

@@ -1,6 +1,7 @@
 import sequelize from '../config/orm_setup';
 import { CreationOptional, DataTypes, ForeignKey, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 import { Realtor } from '../realtor/Realtor.Model';
+import { RealtorProperty } from '../realtorProperty/RealtorProperty.Model';
 
 export class Property extends Model<InferAttributes<Property>, InferCreationAttributes<Property>> {
   declare id: CreationOptional<number>;
@@ -9,12 +10,12 @@ export class Property extends Model<InferAttributes<Property>, InferCreationAttr
   declare state: string;
   declare propertyType: string;
   declare localGovernment: string;
-  declare subLocalGovernment: string;
+  declare district: string;
   declare firstLineAddress: string;
   declare paid: boolean | null;
   declare listingDate: Date;
-  declare realtorId: ForeignKey<Realtor['id']>;
-  declare images: string[]; // Array of image file paths
+  declare posterId: ForeignKey<Realtor['id']>;
+  declare images:string;
 }
 
 Property.init(
@@ -48,7 +49,7 @@ Property.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    subLocalGovernment: {
+    district: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -60,14 +61,24 @@ Property.init(
       type: DataTypes.DATE,
       allowNull: true,
     },
-    realtorId: {
+    posterId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
     images: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
+      type: DataTypes.JSON,
       allowNull: true,
     },
+  
   },
-  { sequelize, modelName: 'properties' }
+  {
+    sequelize,
+    modelName: 'Property',
+    tableName: 'properties',
+  }
 );
+
+Property.belongsTo(Realtor, { foreignKey: 'posterId' });
+Property.belongsToMany(Realtor, { through: RealtorProperty, foreignKey: 'propertyId' });
+
+export default Property;

@@ -65,4 +65,4 @@ Likes.init(
 
 Likes.belongsTo(Realtor, { as: 'likedBy', foreignKey: 'likedById' });
 Likes.belongsTo(Realtor, { as: 'postedBy', foreignKey: 'postedById' });
-Likes.belongsTo(Property, { as: 'property', foreignKey: 'property' });
+Likes.belongsTo(Property, { as: 'property', foreignKey: 'propertyId' });

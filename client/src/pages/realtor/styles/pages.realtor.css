@@ -1,0 +1,59 @@
+/* RealtorProfile.css */
+
+.profile-picture-container {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    position: relative;
+    display: inline-block;
+;/* Rounded border */
+  }
+  
+  .camera-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+    background: white;
+    border-radius: 50%;
+    padding: 5px;
+  }
+  
+  .profile-picture-container img {
+    width: 150px; /* Adjust size as needed */
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ddd; /* Border around the image */
+  }
+  
+  .camera-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+    background: white;
+    border-radius: 50%;
+    padding: 5px;
+    border: 1px solid #ddd;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .button-container {
+    margin-top: 20px;
+  }
+  
+  .modal-content {
+    border-radius: 0.5rem;
+  }
+.icon{
+  width: 2vw;
+  min-width: 1.2rem;
+  height:2vw;
+  min-height: 1.2rem;
+}

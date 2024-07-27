@@ -17,14 +17,23 @@
     border-bottom-left-radius: 1.5rem;
     border-bottom-right-radius: 1.5rem;
     background: rgba(0,0,0,0.3);
-    border:none
+    border:none;
   }
+  .authOption-button{
+    border-top-left-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+    background: rgba(0,0,0,0.3);
+    border:none;
+    width:10rem !important
+  }
+  
 
   .line-container {
     display: flex;
     align-items: center;
     width: 100%;
-    max-width: 600px;
     padding: 0 20px;
   }
   

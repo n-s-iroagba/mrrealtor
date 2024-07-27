@@ -1,0 +1,25 @@
+.dashboard-button {
+    width: 100%; 
+    height: 6rem; /* Adjust size as needed */
+ 
+    border: none; /* Removes default button border */
+    background: rgba(146, 138, 119, 0.4);
+    font-size: 16px; /* Adjust text size */
+    cursor: pointer; /* Cursor style on hover */
+    outline: none; /* Removes default focus outline */
+  }
+
+
+  .dash-logo{
+    
+    height: 4rem;
+  }
+  .small-font{
+    font-size: xx-small;
+  }
+
+   .line {
+    flex: 1;
+    height: 1px;
+    background-color: #000;
+  }

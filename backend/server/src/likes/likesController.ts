@@ -25,7 +25,6 @@ export const getLikesForProperty = async (req: Request, res: Response) => {
         },
       ],
     });
-
     return res.status(200).json(likes);
   } catch (error) {
     console.error('Error fetching likes:', error);

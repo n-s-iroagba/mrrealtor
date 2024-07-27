@@ -1,6 +1,11 @@
 // /sockets/chatSocket.ts
 import { Server as SocketIOServer, Socket } from 'socket.io';
 import { Realtor } from '../realtor/Realtor.Model';
+import { Message } from '../message/Message.Model';
+import { Land } from '../land/Land.Model';
+import Property from '../property/Property.Model';
+import { customError } from '../utils/utils';
+import { Chat } from '../chat/Chat.Model';
 
 
 
@@ -25,18 +30,55 @@ const handleChatSockets = (io: SocketIOServer) => {
       }
     });
 
-    socket.on('message', async (message) => {
-      console.log('received: %s', message);
+    socket.on('message', async (payload) => {
+      console.log('received: %s', payload);
 
-      const parsedMessage = JSON.parse(message);
-      const { to, content } = parsedMessage;
+      const parsedMessage = JSON.parse(payload);
+      const { reciepientId, message, senderId , propertyType,propertyId } = parsedMessage;
 
       try {
-        const recipient = await Realtor.findByPk(to);
+        const recipient = await Realtor.findByPk(reciepientId);
         if (recipient && recipient.socketId) {
-          io.to(recipient.socketId).emit('message', JSON.stringify({ from: socket.id, content }));
+            let chat = await Chat.findOne({
+              where:{
+                realtorId:senderId,
+                clientId:reciepientId,
+                propertyInQuestionId:propertyId,
+                propertyType
+              }
+            })
+            if(!chat){
+            chat = await Chat.create({
+            clientId: senderId,
+            realtorId: reciepientId,
+            propertyInQuestionId:propertyId,
+            propertyType
+           })
+          }
+        
+           await Message.create({
+            senderId,
+            reciepientId,
+            message,
+            timeStamp: new Date(),
+            chatId: chat.id,
+          })
+
+          const allChat = await Chat.findAll({
+            where:{
+              realtorId:senderId,
+              clientId:reciepientId,
+              propertyInQuestionId:propertyId,
+              propertyType
+            }
+          })
+
+          io.to(recipient.socketId).emit('message', JSON.stringify({ from: socket.id, message }));
+          io.to(socket.id).emit('sentChat', allChat);
+          io.to(recipient.socketId).emit('receiveChat', allChat);
+
         } else {
-          console.log(`Recipient with id: ${to} not found or not connected`);
+          console.log(`Recipient with id: ${reciepientId} not found or not connected`);
         }
       } catch (error) {
         console.error('Error sending message:', error);

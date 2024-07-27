@@ -40,7 +40,7 @@ const navigate = useNavigate()
 
   return (
 
-    <div className='form-wrapper px-5 pt-5 mx-5'>
+    <div className='form-wrapper px-5 pt-5 mx-1'>
       <h3 className='text-center'>Sign Up</h3>
       <Form noValidate validated={validated} onSubmit={(e: any) => handleSubmit(realtorData, e, createRealtorUrl,navigate)}>
 

@@ -14,11 +14,12 @@ export const createProperty = async (req: Request, res: Response) => {
     }
 
     try {
-      const { commercialType, price, state, propertyType, localGovernment, subLocalGovernment, firstLineAddress, listingDate, realtorId } = req.body;
+      const { commercialType, price, state, propertyType, localGovernment, district, firstLineAddress, listingDate, posterId } = req.body;
 
    
       const files = req.files as Express.Multer.File[];
-      const images = files?.map(file => file.path) || [];
+      const tempImages = files?.map(file => file.path) || [];
+      const images =  JSON.stringify(tempImages)
 
       const property = await Property.create({
         commercialType,
@@ -26,11 +27,12 @@ export const createProperty = async (req: Request, res: Response) => {
         state,
         propertyType,
         localGovernment,
-        subLocalGovernment,
+        district,
         firstLineAddress,
         listingDate,
-        realtorId,
-        images, 
+        posterId,
+        images
+  
       });
 
       return res.status(201).json(property);
@@ -56,7 +58,7 @@ export const getAllProperties = async (req: Request, res: Response) => {
 export const getAllPropertiesForARealtor = async (req: Request, res: Response) => {
     const {realtorId} = req.params
     try {
-      const properties = await Property.findAll({where: {realtorId:realtorId}});
+      const properties = await Property.findAll({where: {posterId:realtorId}});
       return res.status(200).json(properties);
     } catch (err) {
       console.error('Error retrieving properties:', err);
@@ -121,7 +123,7 @@ const DEFAULT_VALUES = {
   state: 'DefaultState',
   propertyType: 'DefaultType',
   localGovernment: 'DefaultLocalGov',
-  subLocalGovernment: 'DefaultSubLocalGov',
+  district: 'DefaultSubLocalGov',
   firstLineAddress: '',
 };
 
@@ -134,7 +136,7 @@ export const searchAllProperties = async (req: Request, res: Response) => {
       state,
       propertyType,
       localGovernment,
-      subLocalGovernment,
+      district,
       firstLineAddress,
     } = req.query;
 
@@ -150,7 +152,7 @@ export const searchAllProperties = async (req: Request, res: Response) => {
         state: state || DEFAULT_VALUES.state,
         propertyType: propertyType || DEFAULT_VALUES.propertyType,
         localGovernment: localGovernment || DEFAULT_VALUES.localGovernment,
-        subLocalGovernment: subLocalGovernment || DEFAULT_VALUES.subLocalGovernment,
+        district: district || DEFAULT_VALUES.district,
         firstLineAddress: {
           [Op.iLike]: `%${firstLineAddress || DEFAULT_VALUES.firstLineAddress}%`,
         },

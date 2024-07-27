@@ -1,14 +1,23 @@
 import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 import sequelize from '../config/orm_setup';
+import { NonAttribute } from 'sequelize';
+import { ForeignKey } from 'sequelize';
+import { Chat } from '../chat/Chat.Model';
+
 
 export class Message extends Model<InferAttributes<Message>, InferCreationAttributes<Message>> {
   declare id: CreationOptional<number>;
   declare senderId: number;
-  declare recipientId: number;
+  declare reciepientId: number;
   declare message: string;
   declare timeStamp: Date;
+  declare chatId : ForeignKey<Chat['id']>
+  declare seen:boolean|null;
 }
-
+// Message.belongsTo(Chat,
+//   {
+//     foreignKey: 'chatId'
+//   })
 Message.init(
   {
     id: {
@@ -21,7 +30,7 @@ Message.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    recipientId: {
+    reciepientId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -32,6 +41,10 @@ Message.init(
     timeStamp: {
       type: DataTypes.DATE,
       allowNull: false,
+    },
+    seen: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
     },
   },
   {
