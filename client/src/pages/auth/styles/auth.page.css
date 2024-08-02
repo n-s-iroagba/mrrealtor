@@ -1,0 +1,23 @@
+/* Footer.css */
+
+/* Default padding for all screens */
+.sign-up {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  /* Medium screens (≥768px) */
+  @media (min-width: 768px) {
+    .sign-up {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  }
+  
+  /* Large screens (≥992px) */
+  @media (min-width: 992px) {
+    .sign-up {
+    width: 50%;;
+    }
+  }
+  

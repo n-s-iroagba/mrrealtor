@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/common/Home";
-import ProfileLayout from "../features/profile/layout/ProfileLayout";
+
 import ListedBuildings from "../pages/common/ListedBuidings";
-import ListLands from "../pages/realtor/LikedLands";
+
 import ListedLands from "../pages/common/ListedLands";
 import LikedBuildings from "../pages/realtor/LikedBuildings";
 import LikedLands from "../pages/realtor/LikedLands";
@@ -10,10 +10,15 @@ import MyProfile from "../pages/realtor/MyProfile";
 import RealtorProfile from "../pages/realtor/RealtorProfile";
 import FutureAppointment from "../pages/realtor/FutureAppointments";
 import Dashboard from "../pages/realtor/Dashboard";
-import ListBuilding from "../pages/realtor/ListBuilding";
+
 import RealtorChatList from "../pages/realtor/RealtorChatList";
 import PastAppointment from "../pages/realtor/PastAppointments";
-import NotificationLayout from "../notification/layout/NotificationLayout";
+
+import SignUp from "../pages/auth/SignUp";
+import Login from "../pages/auth/Login";
+import BuildingDetails from "../features/listing/layout/BuildingDetails";
+
+import BuildingSearchListing from "../pages/realtor/BuildingSearchListingLayout";
 
 
 export const router = createBrowserRouter([
@@ -22,27 +27,31 @@ export const router = createBrowserRouter([
         element: <Home />
     },
     {
+        path: '/signup',
+        element: <SignUp />
+    },
+    {
+        path: '/login',
+        element: <Login />
+    },
+
+    {
         path: '/realtor/chatlist',
         element: <RealtorChatList />
     },
+
     {
-        path: '/newlisting',
-        element: <ProfileLayout/>
+        path: '/building/:commercialType',
+        element: <BuildingSearchListing/>
     },
+    
     {
-        path: '/list/building',
-        element: <ListBuilding />
+        path: '/buildings/:id',
+        element: <BuildingDetails />
     },
+  
     {
-        path: '/list/lands',
-        element: <ListLands />
-    },
-    {
-        path: '/listed/building',
-        element: <ListedBuildings />
-    },
-    {
-        path: '/listed/lands',
+        path: '/land/:commercialPurpose',
         element: <ListedLands />
     },
     {
@@ -75,12 +84,12 @@ export const router = createBrowserRouter([
         element: <Dashboard />
     },
 
-    {
-        path: '/temp',
-        element: <NotificationLayout/>
-    },
+    // {
+    //     path: '/temp',
+    //     element:
+    // }
     // {
     //     path: '/admin-profile',
-    //     element: <AdminProfile />
+    //     element: <AdminProfile /
     // }
 ]);

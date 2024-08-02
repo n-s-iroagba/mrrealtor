@@ -19,8 +19,17 @@
 
 }
 .listing-icon{
-color: deepskyblue;
+color: #0091ff;
 }
+
+.address-container {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  display: inline-block; /* Ensure it respects the parent's width */
+}
+
 
 .form-wrapper{
     border:2px solid black;
@@ -63,4 +72,48 @@ color: deepskyblue;
     height: 1px;
     background-color: #000;
   }
-  
+.small-font{
+  font-size: x-small;
+}
+.search-listing-card{
+  position: relative;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  box-shadow: #0d0d0d;
+}
+.days{
+  position: absolute;
+  top:10px;
+  left: 10px;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  border-bottom-left-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
+}
+.like-button{
+  position: absolute;
+  bottom:30px;
+  right:15px;
+}
+.like-button-red{
+   color:red;
+}
+.like-button-white{
+  color: white;
+}
+.card-image{
+  position:relative;
+  object-fit: cover;
+  overflow: hidden;
+}
+.image{
+  aspect-ratio: 16/9;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+
+}
+.full-height{
+  min-height:max(90vh,10cm)
+}

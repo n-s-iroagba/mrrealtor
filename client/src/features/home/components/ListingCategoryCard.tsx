@@ -18,9 +18,12 @@ export const ListingCategoryCard: React.FC<{stylingClassName:any, numberOfProper
 <div>
     <Card className={`${stylingClassName} listingCard px-5`}>
       
-  
-          <Card.Title className="listingCardTitle">{title}</Card.Title>
-        <Card.Text className="listingCardCount" >{numberOfProperties}</Card.Text>
+         <div className="d-flex">
+      
+          <Card.Title className="text-center text-dark listingCardTitle">{title}</Card.Title>
+          
+        {numberOfProperties!==0 && <Card.Text className="listingCardCount text-dark" >{numberOfProperties}</Card.Text>}
+        </div>
        
        
    

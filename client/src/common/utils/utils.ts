@@ -40,9 +40,11 @@ type ReadableItem = {
     return false;
   };
 
-  export const numberWithCommas = (number: number):string => {
+  export const numberWithCommas = (number: number) => {
     const str = String(number);
     let formatted = '';
+    if (str.length < 4)
+      return str;
   
     for (let i = str.length - 1, count = 0; i >= 0; i--, count++) {
       formatted = str[i] + formatted;
@@ -53,4 +55,27 @@ type ReadableItem = {
   
     return formatted;
   };
+
+
+  export function daysFromToday(dateString: string): number {
+    // Parse the input date string to a Date object
+    const inputDate = new Date(dateString);
+  
+    // Check if the date is valid
+    if (isNaN(inputDate.getTime())) {
+      throw new Error('Invalid date format');
+    }
+  
+    // Get the current date
+    const currentDate = new Date();
+  
+    // Calculate the difference in time (in milliseconds)
+    const timeDifference = currentDate.getTime() - inputDate.getTime();
+  
+    // Convert the time difference from milliseconds to days
+    const dayDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  
+    return dayDifference;
+  }
+  
   

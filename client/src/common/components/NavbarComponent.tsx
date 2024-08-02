@@ -10,6 +10,8 @@ import blacklogo from '../../assets/logo/blacklogo.png';
 import Logo from './Logo';
 import '../styles/common.styles.css'
 import useIsLargeScreen from '../hooks/useIsLargeScreen';
+import { CommercialPurpose } from '../types/commonTypes';
+
 
 const NavbarComponent: React.FC = () => {
   const [isIconDisplay, setIsIconDisplay] = useState<boolean>(true)
@@ -19,10 +21,10 @@ const NavbarComponent: React.FC = () => {
   const isLargeScreen = useIsLargeScreen()
 
   const navLinks = [
-    { path: 'buy', text: 'Buy' },
-    { path: 'sell', text: 'Sell' },
-    { path: 'rent', text: 'Rent' },
-    { path: 'lease', text: 'Lease' },
+    { path: `building/${CommercialPurpose.SALE}`, text: 'Buy' },
+    { path: 'dashboard', text: 'Sell' },
+    { path: `building/${CommercialPurpose.RENTAL}`, text: 'Rent' },
+    { path: 'dashboard', text: 'Lease' },
   ];
   const handleToggele = () => {
     setIsIconDisplay(!isIconDisplay)
@@ -43,7 +45,9 @@ const NavbarComponent: React.FC = () => {
         <React.Fragment key={index}>
           {isLargeScreen && index % 2 === 0 ? (
           
-                <button className="curved-button px-5">
+                <button onClick={()=>{
+                 navigate(`/${link.path}`)
+                }} className="curved-button px-5">
                 {link.text}
 
               </button>
@@ -52,7 +56,9 @@ const NavbarComponent: React.FC = () => {
        
            
           ) : (
-            <Nav.Link className="text-dark">
+            <Nav.Link  onClick={()=>{
+              navigate(`/${link.path}`)
+             }} className="text-dark">
               {link.text}
             </Nav.Link>
           )}

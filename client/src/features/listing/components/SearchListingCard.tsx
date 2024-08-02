@@ -1,35 +1,44 @@
-import {  faLocationDot } from '@fortawesome/free-solid-svg-icons';
+
+import { faHeart, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react'
-import { Card, Image } from 'react-bootstrap';
-import '../styles/listing.styles.css'
-import {ContactRealtorButton, CopyLinkButton} from './Buttons';
+import React from 'react';
+import { Card, Col, Image, Row } from 'react-bootstrap';
+import '../styles/listing.styles.css';
+import { ContactRealtorButton, ViewBuildingButton } from './Buttons';
+import { BuildingDTO } from '../types/dto';
+import { daysFromToday, numberWithCommas } from '../../../common/utils/utils';
 
+const SearchListingCard: React.FC<{ data: BuildingDTO }> = ({ data }) => {
+    const liked = false
+  return (
+    <Card className='px-3 pt-5 pb-4 h-100 search-listing-card shadow'>
+      
+       <div className='card-image'>
+       <div className='days bg-primary text-light px-2'>{daysFromToday(data.listingDate.toString())} days ago</div>
+      <Image className='w-100 image' src={data.images[0]} />
+      <FontAwesomeIcon className={`like-button ${liked?'like-button-red':'like-button-white'}`} size='2x' icon={faHeart}/>
+      </div>
 
-const SearchListingCard:React.FC<{propertyType:string,numberOfRooms?:number,address:string,bestAmmenity:string,otherAmmenity:string,cost:number,image:any}> = ({
-    propertyType,
-    numberOfRooms,
-    address,
-    bestAmmenity,
-    otherAmmenity,
-    cost,
-    image
-}) =>{
-return<div><Card  className=' px-2 pt-2'>
-<Image src={image}/>
-<Card.Title className='mt-3'>N{cost} per year</Card.Title>
-<Card.Title>{numberOfRooms} {propertyType} | {bestAmmenity} | {otherAmmenity}</Card.Title>
-<div className='d-flex justify-content-between pb-3'>
-    <div>
-        <FontAwesomeIcon className='listing-icon' icon= {faLocationDot}/>{'  '}
-        {address}
-
-    </div>
-    <ContactRealtorButton backgroundColor={'bg-primary'}/>
-    
-</div>
-</Card>
+      <Card.Title className='mt-1'>N{numberWithCommas(data.price)} per year</Card.Title>
+      <Card.Text>{data.numberOfRooms} Bedroom | {data.propertyType} | {data.bestAmmenity} | {data.otherAmmenity} |</Card.Text>
+      <div className='d-flex justify-content-between mb-1 mt-auto'>
+      <div className='address-container'>
+  <FontAwesomeIcon className='listing-icon' icon={faLocationDot} />{'  '}
+  {data.firstLineAddress}
 </div>
 
+      </div>
+      <Row className='d-flex justify-content-between mt-auto'>
+        <Col xs={6}>
+          <ViewBuildingButton data={data} />
+        </Col>
+        <Col xs={6}>
+          <ContactRealtorButton backgroundColor={'bg-primary'} />
+        </Col>
+      </Row>
+    </Card>
+  );
 }
-export default SearchListingCard
+
+export default SearchListingCard;
+
