@@ -17,9 +17,10 @@ const LikedByModal: React.FC<RealtorListModalProps> = ({ show, onHide, likedBy }
     return (
         <Modal show={show} onHide={onHide} centered>
             <Modal.Header closeButton>
-                <Modal.Title>Liked By Realtors</Modal.Title>
+                <Modal.Title>Liked By</Modal.Title>
             </Modal.Header>
             <Modal.Body>
+            {likedBy.length === 0 && <p>No realtors have liked this building yet.</p>}
                 <ListGroup variant="flush">
                     {likedBy.map((realtor, index) => (
                         <ListGroup.Item key={index} className="d-flex justify-content-between align-items-center">
@@ -31,8 +32,17 @@ const LikedByModal: React.FC<RealtorListModalProps> = ({ show, onHide, likedBy }
                     ))}
                 </ListGroup>
             </Modal.Body>
+            <Modal.Footer>
+        <Button variant="secondary" onClick={onHide}>
+          Close
+        </Button>
+      </Modal.Footer>
         </Modal>
     );
 };
 
 export default  LikedByModal;
+
+
+
+

@@ -3,10 +3,12 @@ import express from 'express';
 import http from 'http';
 import { Server as SocketIOServer } from 'socket.io';
 import cors from 'cors';
+import cron from 'node-cron';
 import initializeSockets from './sockets';
 import sequelize from './config/orm_setup';
 import router from './router/router';
 import { OAuth2Client } from 'google-auth-library';
+import { sendReminders } from './cron/appointmentCron';
 
 
 const app = express();
@@ -17,8 +19,9 @@ const server = http.createServer(app);
 initializeSockets(server);
 
 app.get('/', async (req, res) => {
-  res.send('Socket.io server is running');
+  res.status(200).send(`server is running`);
 });
+cron.schedule('0 * * * *', sendReminders);
 app.use('/messages/:id',router)
 app.use('/admins/:id', router);
 
@@ -53,15 +56,16 @@ app.use('/properties/:id', router);
 
 app.use('/properties/:id', router)
 
-const PORT = 4000;
-sequelize
-  .sync({
-    alter:true,
-  force:true
-  })
-  .then(() => console.log('models formed'))
-  .catch((err:any) => console.log(err));
-server.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
-});
+// const PORT = 4000;
+// sequelize
+//   .sync({
+//     alter:true,
+//   force:true
+//   })
+//   .then(() => console.log('models formed'))
+//   .catch((err:any) => console.log(err));
+// server.listen(PORT, () => {
+//   console.log(`Server is listening on port ${PORT}`);
+// });
 
+export default app;

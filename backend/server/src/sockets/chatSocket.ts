@@ -1,11 +1,9 @@
 // /sockets/chatSocket.ts
 import { Server as SocketIOServer, Socket } from 'socket.io';
-import { Realtor } from '../realtor/Realtor.Model';
-import { Message } from '../message/Message.Model';
-import { Land } from '../land/Land.Model';
-import Property from '../property/Property.Model';
-import { customError } from '../utils/utils';
-import { Chat } from '../chat/Chat.Model';
+import { Chat } from '../models/Chat.Model';
+import { Message } from '../models/Message.Model';
+import { Realtor } from '../models/Realtor.Model';
+
 
 
 

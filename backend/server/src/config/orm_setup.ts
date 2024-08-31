@@ -3,7 +3,7 @@ import { Sequelize } from "sequelize";
 
 
 
-const sequelize = new Sequelize('mrrealtor', 'root', '97chocho', {
+const sequelize = new Sequelize('realtor', 'root', '97chocho', {
   dialect: 'mysql',
   host: 'localhost',
   port: 3306,

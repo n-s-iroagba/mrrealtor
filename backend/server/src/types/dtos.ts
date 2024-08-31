@@ -1,4 +1,5 @@
 
+
 export type BuildingSearchOptions = {
     
     commercialType: string;
@@ -9,7 +10,7 @@ export type BuildingSearchOptions = {
     };
     bestAmmenity: string | null;
     otherAmmenity: string | null;
-    localGovernmentArea: LocalGovernmentArea | null;
-    district: District | null;
-    state: State | null;
+    localGovernmentAreaId: number | null;
+    districtId: number | null;
+    stateId: | null;
   }

@@ -1,6 +1,6 @@
 // src/components/RealtorAccordion.tsx
-import React from 'react';
-import { Accordion, Button, Card, Col, Row } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Accordion, Button, Card, Col, Form, InputGroup, Row } from 'react-bootstrap';
 import profilepic from '../../../assets/logo/blacklogo.png'
 import '../styles/realtor.styles.css'
 interface Realtor {
@@ -20,6 +20,7 @@ interface RealtorAccordionProps {
   onDelete: (id: number) => void;
   onBan: (id: number) => void;
   onViewListings: (id: number) => void;
+  onViewPaidListings:(id: number)=>void;
   onViewLikes: (id: number) => void;
   onViewFutureAppointments: (id: number) => void;
   onViewPastAppointments: (id: number) => void;
@@ -31,13 +32,42 @@ const RealtorAccordion: React.FC<RealtorAccordionProps> = ({
   onDelete,
   onBan,
   onViewListings,
+  onViewPaidListings,
   onViewLikes,
   onViewFutureAppointments,
   onViewPastAppointments
 }) => {
+
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [filteredRealtors, setFilteredRealtors] = useState<Realtor[]>(realtors);
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value.toLowerCase();
+    setSearchTerm(value);
+    console.log('value is'+searchTerm)
+   
+
+    const filtered = realtors.filter((realtor) =>
+      realtor.firstName.toLowerCase().includes(value) || realtor.lastName.toLowerCase().includes(value)
+    );
+
+    setFilteredRealtors(filtered);
+  };
   return (
+    <>
+    <InputGroup className="mb-3">
+    <Form.Control
+      type="text"
+      placeholder="Search Realtors by first or last name only"
+      value={searchTerm}
+      onChange={handleSearch}
+    />
+    <Button variant="outline-secondary">
+      Search
+    </Button>
+  </InputGroup>
     <Accordion>
-      {realtors.map((realtor) => (
+      {filteredRealtors.map((realtor) => (
         <Card key={realtor.id}>
          <Accordion.Item eventKey="0">
         <Accordion.Header>{realtor.firstName} {realtor.lastName}</Accordion.Header>
@@ -93,7 +123,10 @@ const RealtorAccordion: React.FC<RealtorAccordionProps> = ({
                 <Button variant="warning" className="w-100 h-100" onClick={() => onBan(realtor.id)}>Ban</Button>
               </Col>
               <Col xs={12} sm={6} md={4} lg={3} className="mb-2">
-                <Button variant="info" className="w-100 h-100" onClick={() => onViewListings(realtor.id)}>View Listings</Button>
+                <Button variant="info" className="w-100 h-100" onClick={() => onViewListings(realtor.id)}>View Unpaid Listings</Button>
+              </Col>
+              <Col xs={12} sm={6} md={4} lg={3} className="mb-2">
+                <Button variant="info" className="w-100 h-100" onClick={() => onViewPaidListings(realtor.id)}>View Paid Listings</Button>
               </Col>
               <Col xs={12} sm={6} md={4} lg={3} className="mb-2">
                 <Button variant="info" className="w-100 h-100" onClick={() => onViewLikes(realtor.id)}>View Likes</Button>
@@ -111,6 +144,7 @@ const RealtorAccordion: React.FC<RealtorAccordionProps> = ({
         </Card>
       ))}
     </Accordion>
+    </>
   );
 };
 

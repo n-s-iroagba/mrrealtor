@@ -75,6 +75,10 @@ const RealtorList: React.FC = () => {
     console.log(`View listings for realtor ${id}`);
   };
 
+  const handleViewPaidListings = (id: number) => {
+    console.log(`View listings for realtor ${id}`);
+  };
+
   const handleViewLikes = (id: number) => {
     console.log(`View likes for realtor ${id}`);
   };
@@ -96,6 +100,7 @@ const RealtorList: React.FC = () => {
         onDelete={handleDelete}
         onBan={handleBan}
         onViewListings={handleViewListings}
+        onViewPaidListings={handleViewPaidListings}
         onViewLikes={handleViewLikes}
         onViewFutureAppointments={handleViewFutureAppointments}
         onViewPastAppointments={handleViewPastAppointments}
