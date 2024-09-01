@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
+import React, { useState, } from 'react';
 import NotificationsModal from '../components/NotifcationsModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
@@ -7,12 +6,12 @@ import '../styles/notification.styles.css'
 
 
 
-const recipientId = 1; // Example recipientId, replace with actual value
 
-const NotificationLayout: React.FC = () => {
+
+const NotificationLayout: React.FC<{modalVisibility:boolean}> = ({modalVisibility}) => {
   // const [notifications, setNotifications] = useState<Notification[]>([]);
   const [unreadCount, setUnreadCount] = useState<number>(0);
-  const [showModal, setShowModal] = useState<boolean>(true);
+  const [showModal, setShowModal] = useState<boolean>(modalVisibility);
   const notifications:any = [
     {
       id: 1,

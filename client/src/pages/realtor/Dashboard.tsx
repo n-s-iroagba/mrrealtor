@@ -3,14 +3,16 @@ import React from 'react';
 
 
 import DashboardButton from '../../features/dashboard/components/DashboardButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
+
+import { faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
 import logo  from '../../assets/logo/blacklogo.png'
 import { Col, Row } from 'react-bootstrap';
-import MostLikedProperties from '../../features/dashboard/Layout/MostLikedProperties';
+
 import './styles/pages.realtor.css'
-import NotificationLayout from '../../notification/layout/NotificationLayout';
+
 import DashboardDropdown from '../../features/dashboard/components/DashboardDropdown';
+import NotificationLayout from '../../features/notification/layout/NotificationLayout';
+import MiniFooter from '../../features/common/components/MiniFooter';
 const navItems = [
 
 
@@ -33,7 +35,7 @@ const Dashboard: React.FC = () => {
    
    <Row className="d-flex justify-content-between align-items-center">
       <Col xs={4} className="d-flex justify-content-start">
-       <NotificationLayout/>
+       <NotificationLayout modalVisibility={false}/>
       </Col>
       <Col xs={4} className="d-flex justify-content-center">
         <img className="w-100 h-100" src={logo} alt="logo" />
@@ -44,7 +46,7 @@ const Dashboard: React.FC = () => {
     </Row>
    
     <label className='text-center'>Actions</label>
-        <Row className='gy-1 gx-1 d-flex justify-content-center '>
+        <Row className='gy-1 gx-1 d-flex justify-content-center mb-4 '>
 
         {navItems.map((item, index) => (
           <Col xs={3}>
@@ -53,8 +55,7 @@ const Dashboard: React.FC = () => {
         ))}
     </Row>
 
-    <MostLikedProperties/>
-   
+ <MiniFooter/>
     </div>
   );
 };
