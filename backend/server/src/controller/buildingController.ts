@@ -4,40 +4,83 @@ import { BuildingSearchOptions } from "../types/dtos";
 import { Op } from "sequelize";
 import Building from "../models/Building.Model";
 import { District } from "../models/District.Model";
-import { LocalGovernmentArea } from "../models/LocalGovernment.Model";
+import { LocalGovernmentArea } from "../models/LocalGovernmentArea.Model";
 import { State } from "../models/State.Model";
 import upload from "../multer/upload";
 import { BuildingLikes } from "../models/BuildingLikes.Model";
+import sharp from 'sharp';
+import path from 'path';
 
-const uploadFiles = upload.array("images", 10); 
+// Utility function to apply watermark
+const applyWatermark = async (inputPath: string, outputPath: string, watermarkText: string) => {
+  const image = sharp(inputPath);
+  const { width, height } = await image.metadata();
+
+  const svgText = `
+    <svg width="${width}" height="${height}">
+      <text x="50%" y="50%" font-size="48" fill="white" opacity="0.5" text-anchor="middle">${watermarkText}</text>
+    </svg>
+  `;
+
+  await image
+    .composite([{ input: Buffer.from(svgText), gravity: 'center' }])
+    .toFile(outputPath);
+};
+
+
+
+
+
+const uploadFiles = upload.array('images', 10);
+
 export const createBuilding = async (req: Request, res: Response) => {
-  uploadFiles(req, res, async (err: any) => {
-    if (err) {
-      console.error("Error uploading files:", err);
-      return res.status(500).json({ message: "Error uploading files" });
+
+uploadFiles(req, res, async (err: any) => {
+  if (err) {
+    console.error("Error uploading files:", err);
+    return res.status(500).json({ message: "Error uploading files", error: err });
+  }
+
+  try {
+    const files = req.files as Express.Multer.File[];
+    const watermarkedImages = [];
+
+    for (const file of files) {
+      const outputPath = `watermarked_${path.basename(file.path)}`;
+      await applyWatermark(file.path, outputPath, 'Your Watermark');
+      watermarkedImages.push(outputPath);
     }
 
+
+  } catch (err) {
+    console.error("Error applying watermark:", err);
+    return res.status(500).json({ message: "Error applying watermark", error: err });
+  }
+});
+    
     try {
+      const { posterId } = req.params;
       const {
         commercialType,
         price,
         buildingType,
         firstLineAddress,
-        posterId,
         salesPitch,
         numberOfRooms,
-        interiorDesignFeatures,
         bestAmenity,
         otherAmenity,
         location
       } = req.body;
 
       if (!location?.district || !location?.localGovernmentArea || !location?.state) {
+       
         return res.status(400).json({ message: "Location information is incomplete." });
       }
-
+      console.log(req.body)
       const files = req.files as Express.Multer.File[];
       const images = JSON.stringify(files?.map((file) => file.path) || []);
+      console.log('Uploaded files:', files);
+      console.log('File paths:', images);
 
       let district = await District.findOne({ where: { name: location.district } });
       if (!district) {
@@ -57,13 +100,12 @@ export const createBuilding = async (req: Request, res: Response) => {
         price,
         buildingType,
         districtId: district.id,
-        firstLineAddress,
+        firstLineAddress:location.firstLineAddress,
         listingDate: new Date(),
-        posterId,
+        posterId: Number(posterId),
         images,
         salesPitch,
         numberOfRooms,
-        interiorDesignFeatures,
         bestAmenity,
         otherAmenity,
       });
@@ -71,10 +113,9 @@ export const createBuilding = async (req: Request, res: Response) => {
       return res.status(201).json(building);
     } catch (err) {
       console.error("Error creating Building:", err);
-      return res.status(500).json({ message: "Error creating Building" });
+      return res.status(500).json({ message: "Error creating Building", error: err });
     }
-  });
-};
+  }
 
 
 const countBuildingLikes = async (buildingId: number) => {

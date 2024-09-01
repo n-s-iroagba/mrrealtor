@@ -28,4 +28,10 @@ export const districtsUrl=`${domain}/districts`
 
 export const searchBuildingsUrl=`${domain}/search-buildings`
 
+export const registerBuildingUrl = `${domain}/create/building`
+
+export const getBuildingUrl = `${domain}/building`
+export const patchBuildingUrl = `${domain}/update/building`
+export const deleteBuildingUrl = `${domain}/delete/building`
+
 

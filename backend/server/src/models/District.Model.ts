@@ -1,6 +1,6 @@
 import sequelize from '../config/orm_setup';
 import { CreationOptional, DataTypes, ForeignKey, InferAttributes, InferCreationAttributes, Model, NonAttribute } from 'sequelize';
-import { LocalGovernmentArea } from './LocalGovernment.Model';
+import { LocalGovernmentArea } from './LocalGovernmentArea.Model';
 
 export class District extends Model<InferAttributes<District>, InferCreationAttributes<District>> {
     declare id: CreationOptional<number>;

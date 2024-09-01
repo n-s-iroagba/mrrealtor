@@ -1,7 +1,7 @@
 
 
 export interface BuildingDTO {
-  id?: number;
+  id: number;
   commercialType: string;
   price: number;
   numberOfRooms: number;
@@ -13,8 +13,8 @@ export interface BuildingDTO {
   firstLineAddress: string;
   paid: boolean | null;
   listingDate: Date;
-  bestAmmenity: string;
-  otherAmmenity: string;
+  bestAmenity: string;
+  otherAmenity: string;
   images: string[];
   salesPitch: string;
   interiorDesignFeatures: string[];

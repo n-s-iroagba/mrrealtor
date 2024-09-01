@@ -1,4 +1,7 @@
 import { Sequelize } from "sequelize";
+import { Realtor } from "../models/Realtor.Model";
+import { BuildingLikes } from "../models/BuildingLikes.Model";
+import Building from "../models/Building.Model";
 
 
 

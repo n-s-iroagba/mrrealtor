@@ -2,7 +2,8 @@ import sequelize from '../config/orm_setup';
 import { CreationOptional, DataTypes, ForeignKey, InferAttributes, InferCreationAttributes, Model, NonAttribute } from 'sequelize';
 import { District } from './District.Model';
 import { Realtor } from './Realtor.Model';
-import { RealtorBuilding } from './RealtorBuilding.Model';
+import { BuildingLikes } from './BuildingLikes.Model';
+
 
 
 export class Building extends Model<InferAttributes<Building>, InferCreationAttributes<Building>> {
@@ -21,7 +22,8 @@ export class Building extends Model<InferAttributes<Building>, InferCreationAttr
   declare posterId: ForeignKey<Realtor['id']>;
   declare images:string;
   declare salesPitch:string;
-  declare interiorDesignFeatures:string;
+  declare likesCount:number|null
+
 }
 
 Building.init(
@@ -67,11 +69,7 @@ Building.init(
       type: DataTypes.JSON,
       allowNull: false,
     },
-    interiorDesignFeatures: {
-      type: DataTypes.JSON,
-      allowNull: true,
-    },
-    numberOfRooms:  {
+    numberOfRooms: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -83,16 +81,23 @@ Building.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    otherAmenity:  {
+    otherAmenity: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    likesCount:  {
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
   },
   {
     sequelize,
     modelName: 'Building',
+    tableName:'Building'
 
   }
 );
+Building.hasMany(BuildingLikes, { foreignKey: 'likedById' });
+
 
 export default Building;

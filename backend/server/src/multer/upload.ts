@@ -1,29 +1,19 @@
-// multerSetup.ts
 import multer from 'multer';
 import path from 'path';
 
+// Define absolute path for storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, './images');
+    // Resolve the absolute path
+    cb(null, path.resolve(__dirname, './images')); // Adjust the path based on your folder structure
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
+    const ext = path.extname(file.originalname);
+    cb(null, Date.now() + ext); // Unique filename with timestamp
   },
 });
 
-const upload = multer({
-  storage: storage,
-  fileFilter: (req, file, cb) => {
-    const filetypes = /jpeg|jpg|png/;
-    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-    const mimetype = filetypes.test(file.mimetype);
-
-    if (mimetype && extname) {
-      return cb(null, true);
-    } else {
-      cb(new Error('Images only!'));
-    }
-  },
-});
+const upload = multer({ storage });
 
 export default upload;
+

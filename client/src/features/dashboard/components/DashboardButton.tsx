@@ -6,7 +6,7 @@ import '../styles/dashboard.styles.css'
 const DashboardButton : React.FC<{icon:any,label:string,path:string}> = ({icon,label,path})=>{
         const navigate = useNavigate()
         return<button
-        onClick={() => navigate('/' + path)}
+        onClick={() => navigate( path)}
         className="dashboard-button d-flex py-4 align-items-center justify-content-evenly flex-column"
        
       >

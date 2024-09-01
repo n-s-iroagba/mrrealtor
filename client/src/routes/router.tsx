@@ -19,6 +19,8 @@ import BuildingSearchListing from "../pages/realtor/BuildingSearchListingLayout"
 import ChatList from "../features/chat/layout/ChatList";
 import ChatPage from "../pages/realtor/ChatPage";
 import AdminRealtor from "../pages/admin/AdminRealtor";
+import ListBuilding from "../pages/realtor/ListBuilding";
+
 
 
 export const router = createBrowserRouter([
@@ -39,6 +41,12 @@ export const router = createBrowserRouter([
         path: '/realtor/chatlist',
         element: <RealtorChatList />
     },
+     
+  
+    {
+        path: '/list/building',
+        element: <ListBuilding />
+    },
 
     {
         path: '/building/:commercialType',
@@ -54,7 +62,7 @@ export const router = createBrowserRouter([
         path: '/land/:commercialPurpose',
         element: <ListedLands />
     },
-    {
+    {   
         path: '/profile',
         element: <MyProfile />
     },
@@ -99,10 +107,11 @@ export const router = createBrowserRouter([
      {
         path:'/admin/realtors',
         element:<AdminRealtor/>
-     }
-    // {
-    //     path: '/temp',
-    //     element:
-    // }
+     },
+
+    {
+        path: '/temp',
+        element:<ChatPage/>
+    }
    
 ]);

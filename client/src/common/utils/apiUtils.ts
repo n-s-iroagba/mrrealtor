@@ -45,7 +45,8 @@ export const postChangePasswordData = async (url: string, data: any) => {
 export const postFormData = async (url: string, formData: FormData) => {
  
    
-  const headers: { [key: string]: string } = {};
+  const headers: { [key: string]: string } = {}
+  
 
   if (authorizationData) {
     headers['Authorization'] = authorizationData;
@@ -152,7 +153,7 @@ export const patchItem = async (url: string, data: any) => {
   }
 };
 
-export const patchFormDataItem = async (url: string, formData: FormData) => {
+export const patchFormData = async (url: string, formData: FormData) => {
  
    
   const headers: { [key: string]: string } = {};
@@ -160,9 +161,7 @@ export const patchFormDataItem = async (url: string, formData: FormData) => {
   if (authorizationData) {
     headers['Authorization'] = authorizationData;
   }
-  formData.forEach((value, key) => {
-    console.log(`${key}:`, value);
-  })
+
   try {
     const response: AxiosResponse<any> = await axios.patch(url, formData, { headers });
     return response;

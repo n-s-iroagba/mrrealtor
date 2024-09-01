@@ -10,7 +10,7 @@ const Information:React.FC<{title:string,description:string}> = ({
     return (
         <Row className='d-flex align-items-center'>
        <Col xs={2}>
-        <FontAwesomeIcon className='h-50' icon={faHouse}/>
+        <FontAwesomeIcon icon={faHouse}/>
        </Col>
      
         <Col xs={10}>

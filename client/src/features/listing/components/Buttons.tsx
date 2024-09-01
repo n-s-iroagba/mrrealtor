@@ -6,18 +6,41 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-export const ContactRealtorButton:React.FC<{backgroundColor:string}> = ({ backgroundColor}) => {
+
+
+interface ContactRealtorButtonProps {
+  backgroundColor: string;
+  posterId: number;
+  clientId: number;
+  district: string;
+}
+
+    export const ContactRealtorButton: React.FC<ContactRealtorButtonProps> = ({
+  backgroundColor,
+  posterId,
+  clientId,
+  district
+}) => {
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate(`/chat/${posterId}/${district}`);
+  };
+
   return (
-    <button className={`w-100 contact-button px-3 d-flex justify-content-center py-2  ${backgroundColor}`}>
-      <small className='small-font'>contact Agent</small>
+    <button onClick={handleButtonClick} className={`w-100 contact-button px-3 ${backgroundColor}`}>
+      <small>Contact Agent</small>
     </button>
   );
 };
 
+export default ContactRealtorButton;
+
+
 
 export const CopyLinkButton:React.FC = () => {
   return (
-    <button className='share-button text-dark'>
+    <button className='share-button text-dark w-100'>
       Share property link
     </button>
   );

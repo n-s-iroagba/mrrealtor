@@ -1,8 +1,9 @@
 
 import { Server as HTTPServer } from 'http';
 import { Server as SocketIOServer } from 'socket.io';
+import handleChatSockets from './socket';
 
-import handleChatSockets from './chatSocket';
+
 
 const initializeSockets = (server: HTTPServer) => {
   const io = new SocketIOServer(server,{

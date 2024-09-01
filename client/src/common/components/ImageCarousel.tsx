@@ -1,20 +1,22 @@
+// ImageCarousel.tsx
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import Image from 'react-bootstrap/Image';
+import '../styles/common.styles.css';
 
 interface ImageCarouselProps {
   images: string[];
   shouldslide?: boolean;
 }
 
-const ImageCarousel: React.FC<ImageCarouselProps> = ({ images,shouldslide }) => {
+const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, shouldslide }) => {
   return (
-    <Carousel slide={shouldslide}>
+    <Carousel slide={false}>
       {images.map((image, index) => (
         <Carousel.Item key={index}>
-          <Image src={image} alt='property' fluid />
+          <Image className='carousel-image' src={image} alt='property' />
           <Carousel.Caption>
-            <p>Property Image {index + 1} of {images.length}</p>
+            <p>{index + 1} of {images.length}</p>
           </Carousel.Caption> 
         </Carousel.Item>
       ))}
@@ -23,5 +25,6 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images,shouldslide }) => 
 };
 
 export default ImageCarousel;
+
 
         

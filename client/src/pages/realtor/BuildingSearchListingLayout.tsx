@@ -5,7 +5,6 @@ import Logo from "../../common/components/Logo";
 import MiniFooter from "../../common/components/MiniFooter";
 import GroupedDropdown from "../../features/listing/components/GroupedDropdown";
 import './styles/pages.realtor.css';
-import logo from '../../assets/logo/blacklogo.png';
 import { BuildingSearchOptions, District, LocalGovernmentArea, State } from "../../types/dtos";
 import { stateKey } from "../../constants/tokenKeys";
 import { commercialType } from "../../types/enums";
@@ -97,7 +96,7 @@ const BuildingSearchListing: React.FC = () => {
     <>
       <div className="full-height px-3">
         <div className="d-flex justify-content-center ">
-          <Logo logoImage={logo} />
+          <Logo/>
         </div>
         <div className="line"></div>
         <h4 className="my-2">
@@ -125,7 +124,7 @@ const BuildingSearchListing: React.FC = () => {
         <Row className='h-100 gy-3'>
           {assets?.map((asset, index) => (
             <Col xs={12} md={6} lg={4} key={index}>
-              <SearchListingCard data={asset} />
+              <SearchListingCard data={asset} clientId={0} />
             </Col>
           ))}
         </Row>

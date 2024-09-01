@@ -1,7 +1,7 @@
 export const CLIENT_DOMAIN = 'http://localhost:3000/'
-export const SERVER_DOMAIN = 'http://localhost:8000/'
+export const SERVER_DOMAIN = 'http://localhost:7000/'
 
-export const COMPANY_NAME = 'Cassock wealth Investment'
+export const COMPANY_NAME = 'Mr. Realtor'
 
 export const COMPANY_VERIFICATION_EMAIL = 'iroagba97@gmail'
 export const COMPANY_REFERRAL_EMAIL = 'iroagba97@gmail'
@@ -23,9 +23,7 @@ export const CLIENT_DASHBOARD_ROUTE = CLIENT_DOMAIN + 'dashboard'
 export const ALREADY_VERIFIED_ROUTE = CLIENT_DOMAIN + 'already-verified'
 export const COMPANY_SUPPORT_EMAIL = 'iroagba97@gmail'
 
-export const REFERRAL_BONUS_PERCENT = 0.15
 
-export const howToInvestMessage = 'Kindly check you email for guidance of contact us on our social media handle if you face any difficulty'
 
 
 

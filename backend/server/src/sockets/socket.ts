@@ -4,9 +4,16 @@ import { Chat } from '../models/Chat.Model';
 import { Message } from '../models/Message.Model';
 import { Realtor } from '../models/Realtor.Model';
 
-
-
-
+// Emit a building liked event
+export const emitBuildingLiked = (
+  io: SocketIOServer,
+  realtorId: number,
+  likedById:number,
+ 
+) => {
+ const  data= ''
+  io.to(`realtor-${realtorId}`).emit('buildingLiked', data);
+};
 
 const handleChatSockets = (io: SocketIOServer) => {
   io.on('connection', (socket: Socket) => {
@@ -32,44 +39,45 @@ const handleChatSockets = (io: SocketIOServer) => {
       console.log('received: %s', payload);
 
       const parsedMessage = JSON.parse(payload);
-      const { reciepientId, message, senderId , propertyType,propertyId } = parsedMessage;
+      const { reciepientId, message, senderId, propertyType, propertyId } = parsedMessage;
 
       try {
         const recipient = await Realtor.findByPk(reciepientId);
         if (recipient && recipient.socketId) {
-            let chat = await Chat.findOne({
-              where:{
-                realtorId:senderId,
-                clientId:reciepientId,
-                propertyInQuestionId:propertyId,
-                propertyType
-              }
-            })
-            if(!chat){
+          let chat = await Chat.findOne({
+            where: {
+              realtorId: senderId,
+              clientId: reciepientId,
+              propertyInQuestionId: propertyId,
+              propertyType
+            }
+          });
+
+          if (!chat) {
             chat = await Chat.create({
-            clientId: senderId,
-            realtorId: reciepientId,
-            propertyInQuestionId:propertyId,
-            propertyType
-           })
+              clientId: senderId,
+              realtorId: reciepientId,
+              propertyInQuestionId: propertyId,
+              propertyType
+            });
           }
-        
-           await Message.create({
+
+          await Message.create({
             senderId,
             reciepientId,
             message,
             timeStamp: new Date(),
             chatId: chat.id,
-          })
+          });
 
           const allChat = await Chat.findAll({
-            where:{
-              realtorId:senderId,
-              clientId:reciepientId,
-              propertyInQuestionId:propertyId,
+            where: {
+              realtorId: senderId,
+              clientId: reciepientId,
+              propertyInQuestionId: propertyId,
               propertyType
             }
-          })
+          });
 
           io.to(recipient.socketId).emit('message', JSON.stringify({ from: socket.id, message }));
           io.to(socket.id).emit('sentChat', allChat);

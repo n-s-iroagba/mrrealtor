@@ -7,11 +7,8 @@ import { Realtor } from './Realtor.Model';
 export class BuildingLikes extends Model<InferAttributes<BuildingLikes>, InferCreationAttributes<BuildingLikes>> {
   declare id: CreationOptional<number>;
   declare likedById: ForeignKey<Realtor['id']>;
-  declare likedBy: NonAttribute<Realtor>;
-  declare postedById: ForeignKey<Realtor['id']>;
-  declare postedBy: NonAttribute<Realtor>;
-  declare building: NonAttribute<Building>
   declare buildingId: ForeignKey<Building['id']>;
+  declare likedBy: NonAttribute<Realtor>
 }
 
 BuildingLikes.init(
@@ -22,11 +19,10 @@ BuildingLikes.init(
       allowNull: false,
       primaryKey: true, 
     },
-
     likedById: {
       type: DataTypes.INTEGER, 
       references: {
-        model: 'realtors',
+        model: 'Realtor',
         key: 'id',
       },
       onUpdate: 'CASCADE',
@@ -35,16 +31,16 @@ BuildingLikes.init(
     buildingId: {
       type: DataTypes.INTEGER, 
       references: {
-        model: 'realtors',
+        model: 'Building',  // Reference the correct table
         key: 'id',
       },
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
     },
-    
   },
   { sequelize, modelName: 'BuildingLikes' }
 );
 
-BuildingLikes.belongsTo(Realtor, { as: 'likedBy', foreignKey: 'likedById' });
-BuildingLikes.belongsTo(Building, { as: 'building', foreignKey: 'buildingId' });
+// BuildingLikes.belongsTo(Realtor, { as: 'likedBy', foreignKey: 'likedById' });
+// BuildingLikes.belongsTo(Building, { as: 'building', foreignKey: 'buildingId' });
+

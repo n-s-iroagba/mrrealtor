@@ -1,8 +1,6 @@
-import sequelize from '../config/orm_setup';
 import { CreationOptional, DataTypes, ForeignKey, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
+import sequelize from '../config/orm_setup';
 import { Realtor } from './Realtor.Model';
-import { RealtorLand } from './RealtorLand.Model';
-
 
 export class Land extends Model<InferAttributes<Land>, InferCreationAttributes<Land>> {
   declare id: CreationOptional<number>;
@@ -16,7 +14,7 @@ export class Land extends Model<InferAttributes<Land>, InferCreationAttributes<L
   declare paid: boolean | null;
   declare listingDate: Date;
   declare posterId: ForeignKey<Realtor['id']>;
-  declare images: string; 
+  declare images: string;
 }
 
 Land.init(
@@ -71,7 +69,5 @@ Land.init(
       allowNull: true,
     },
   },
-  { sequelize, modelName: 'lands' }
+  { sequelize, modelName: 'Land' }
 );
-Land.belongsToMany(Realtor, { through: RealtorLand, foreignKey: 'landId' });
-Land.hasOne(Realtor, { foreignKey: 'posterId' });
