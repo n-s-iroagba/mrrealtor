@@ -7,16 +7,14 @@ import "../styles/listing.styles.css";
 import { Accordion, Col, Row } from "react-bootstrap";
 import { ContactRealtorButton, CopyLinkButton } from "../components/Buttons";
 
-import ImageCarousel from "../../../common/components/ImageCarousel";
-import Information from "../components/Information";
-
-import { useNavigate } from "react-router-dom";
-import { BuildingDTO } from "../types/dto";
-import { numberWithCommas } from "../../../common/utils/utils";
 import { assets } from "./mockAssets";
 
+import ImageCarousel from "../../common/components/ImageCarousel";
+import { numberWithCommas } from "../../common/utils/utils";
+import Information from "../components/Information";
+
 const BuildingDetails = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
 
   // if (!building) {

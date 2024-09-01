@@ -4,13 +4,11 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-
 import { useNavigate } from 'react-router-dom';
-import blacklogo from '../../assets/logo/blacklogo.png';
-import Logo from './Logo';
 import '../styles/common.styles.css'
 import useIsLargeScreen from '../hooks/useIsLargeScreen';
 import { CommercialPurpose } from '../types/commonTypes';
+import Logo from './Logo';
 
 
 const NavbarComponent: React.FC = () => {
@@ -36,7 +34,7 @@ const NavbarComponent: React.FC = () => {
       className={`bg-body-tertiary bg-light px-4 w-100`}
     >
 
-      <Navbar.Brand><Logo logoImage={blacklogo} /></Navbar.Brand>
+      <Navbar.Brand><Logo/></Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className={`ms-auto d-flex justify-content-between align-items-center w-50 bg bg-light `}>

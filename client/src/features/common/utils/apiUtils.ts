@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
-import { changePasswordTokenKey, LoginTokenKey } from '../../constants/tokenKeys';
+import { changePasswordTokenKey, LoginTokenKey } from '../../../constants/tokenKeys';
+
 const authorizationData = localStorage.getItem(LoginTokenKey)
 export const postData = async (url: string, data: any) => {
  

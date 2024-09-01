@@ -1,5 +1,6 @@
 import image from '../../home/assets/images/firstListing.jpeg'
-import { BuildingDTO } from '../types/dto';
+import { BuildingDTO } from '../types/responseDto';
+
 
 export const assets: BuildingDTO[] = [
     

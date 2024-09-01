@@ -1,11 +1,8 @@
 import React from 'react';
 import '../styles/listing.styles.css'
-import { BuildingDTO } from '../types/dto';
 import { viewBuildingKey } from '../../../constants/tokenKeys';
 import { useNavigate } from 'react-router-dom';
-
-
-
+import { BuildingDTO } from '../types/responseDto';
 
 
 interface ContactRealtorButtonProps {
@@ -58,3 +55,5 @@ const goToView = ()=>{
     </button>
   );
 };
+
+

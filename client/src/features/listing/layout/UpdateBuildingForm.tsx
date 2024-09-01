@@ -1,23 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Col from "react-bootstrap/Col";
-import Select from "react-select";
-import Form from "react-bootstrap/Form";
-import { required } from "../../../common/components/required";
 
-import { Button, Spinner } from "react-bootstrap";
 import { getLGAs, getLgaSubAreas, getNigeriaStates, StateCodes } from "geo-ng";
-import { IBuildingCreation } from "../types/types";
-import { getData, patchFormData } from "../../../common/utils/apiUtils";
-import { getBuildingUrl, patchBuildingUrl } from "../../../constants/urls";
-import ErrorMessage from "../../../common/components/ErrorMessage";
 
+import { UpdateBuildingProps } from "../types/requestDto";
+import { getData, patchFormData } from "../../common/utils/apiUtils";
+import { getBuildingUrl, patchBuildingUrl } from "../../../constants/urls";
+import { Button, Col, Form, Spinner } from "react-bootstrap";
+import { required } from "../../common/components/required";
+import ErrorMessage from "../../common/components/ErrorMessage";
+
+const mockUpdateBuildingProps: UpdateBuildingProps = {
+  commercialType: 'sale',
+  price: 250000,
+  numberOfRooms: 3,
+  buildingType: 'apartment',
+  location: {
+    district: 'Downtown',
+    localGovernmentArea: 'Central',
+    state: 'Lagos',
+    firstLineAddress: '123 Main St',
+  },
+  listingDate: new Date('2024-09-01'),
+  bestAmenity: 'Swimming Pool',
+  otherAmenity: 'Gym',
+  salesPitch: 'A modern apartment in the heart of the city with top-notch amenities and easy access to shopping and dining.',
+};
 
 const UpdateBuildingForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [validated, setValidated] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [estateData, setEstateData] = useState<IBuildingCreation | null>(null);
+  const [estateData, setEstateData] = useState<UpdateBuildingProps>(mockUpdateBuildingProps);
   const [submitting, setSubmitting] = useState(false);
   const [images, setImages] = useState([{ file: null }]);
   const [stateCode, setStateCode] = useState("");
@@ -48,6 +62,13 @@ const UpdateBuildingForm: React.FC = () => {
     fetchBuildingData();
   }, [id]);
 
+
+
+ 
+  
+  const statesOption = getNigeriaStates().map((state) => state.name);
+ 
+
   function getStateCodeByName(stateName: string): string | undefined {
     const states = getNigeriaStates().filter((state) => ({
       name: state.name,
@@ -73,14 +94,6 @@ const UpdateBuildingForm: React.FC = () => {
 
     const formData = new FormData();
 
-    if (estateData) {
-      Object.keys(estateData).forEach((key) => {
-        const value = estateData[key as keyof IBuildingCreation];
-        if (value !== undefined && value !== null) {
-          formData.append(key, value.toString());
-        }
-      });
-    }
 
     images.forEach((image, index) => {
       if (image.file) {
@@ -151,36 +164,39 @@ const UpdateBuildingForm: React.FC = () => {
     newImages[index].file = event.target.files[0];
     setImages(newImages);
   };
-  interface Option {
-    label: "rental" | "sale";
-    value: "rental" | "sale";
-  }
-  const statesOption = getNigeriaStates().map((state) => state.name);
-  const commerceOptions:Option[] = [
-    { value: "rental", label: "rental" },
-    { value: "sale", label: "sale" },
+
+
+  const commerceOptions = [
+    { value: "Rental", label: "Rental" },
+    { value: "Sale", label: "Sale" },
   ];
 
-  if (!estateData) {
-    return <Spinner animation="border" />;
-  }
 
   return (
     <div className="form-wrapper px-5 pt-5 mx-5">
       <h3 className="text-center">Update Building</h3>
       <Form noValidate validated={validated} onSubmit={(e: any) => handleSubmit(e)}>
+     
         <Form.Group>
-          <Form.Label>Commercial Type {required}</Form.Label>
-          <Select
-            options={commerceOptions}
+        <Form.Label>Commercial Type {required}</Form.Label>
+          <Form.Select
             onChange={(e: any) => {
               setEstateData((prevData: any) => ({
                 ...prevData,
-                commercialType: e.label,
+                commerceType: e.label,
               }));
             }}
-            value={{ label: estateData.commercialType, value: estateData.commercialType }}
-          />
+            className=" bg-transparent text-dark"
+          >
+            <option className=" primary-background text-dark" value={""}>
+              Select a commercial purpose
+            </option>
+            {commerceOptions.map((option: any) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </Form.Select>
         </Form.Group>
 
         <Form.Group as={Col} controlId="validationFormik01">

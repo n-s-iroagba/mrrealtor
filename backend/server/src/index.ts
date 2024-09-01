@@ -21,52 +21,20 @@ const server = http.createServer(app);
 
 initializeSockets(server);
 
-// app.get('/', router);
+
 cron.schedule('0 * * * *', sendReminders);
-// app.post('/create/building/:posterId',router)
-// app.use('/admins/:id', router);
 
 
-// app.use('/realtors', router);
-
-// app.use('/realtors', router);
-
-// app.use('/realtors/:id', router);
-
-// app.use('/realtors/:id', router);
-
-// app.use('/realtors/:id', router);
-
-// app.use('/likes', router)
-
-// app.use('/all-likes', router)
-
-
-// app.use('/properties', router);
-
-
-// app.use('/properties', router);
-
-
-// app.use('/properties/:id', router);
-
-// app.use('/properties/:realtorId',router);
-
-
-// app.use('/properties/:id', router);
-
-// app.use('/properties/:id', router)
-
-const PORT = 7000;
-sequelize
-  .sync({
-    //alter:true,
-  force:true
-  })
-  .then(() => console.log('models formed'))
-  .catch((err:any) => console.log(err));
-server.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
-});
+// const PORT = 7000;
+// sequelize
+//   .sync({
+//     //alter:true,
+//   force:true
+//   })
+//   .then(() => console.log('models formed'))
+//   .catch((err:any) => console.log(err));
+// server.listen(PORT, () => {
+//   console.log(`Server is listening on port ${PORT}`);
+// });
 
 export default app;

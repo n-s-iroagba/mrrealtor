@@ -2,20 +2,21 @@ import React, { useState } from "react";
 import Col from "react-bootstrap/Col";
 import Select from "react-select";
 import Form from "react-bootstrap/Form";
-import { required } from "../../../common/components/required";
-import ErrorMessage from "../../../common/components/ErrorMessage";
 import { useNavigate } from "react-router-dom";
 import "../styles/listing.styles.css";
 import { Button, Spinner } from "react-bootstrap";
 import { getLGAs, getLgaSubAreas, getNigeriaStates, StateCodes } from "geo-ng";
-import { IBuildingCreation } from "../types/types";
 import { registerBuildingUrl } from "../../../constants/urls";
-import { postFormData } from "../../../common/utils/apiUtils";
+import ErrorMessage from "../../common/components/ErrorMessage";
+import { required } from "../../common/components/required";
+import { postFormData } from "../../common/utils/apiUtils";
+import { ListBuildingProps } from "../types/requestDto";
+
 
 const NewBuildingListingForm: React.FC = () => {
   const [validated, setValidated] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [estateData, setEstateData] = useState<IBuildingCreation>({
+  const [estateData, setEstateData] = useState<ListBuildingProps>({
     commercialType: 'rental',
     price: 0,
     numberOfRooms: 0,

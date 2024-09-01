@@ -1,6 +1,6 @@
 import React from 'react'
 import '../styles/common.styles.css'
-import logoImage from '../../assets/logo/blacklogo.png'
+import logoImage from '../assets/logo/blacklogo.png'
 const Logo:React.FC = () =>{
     return(
         <div>

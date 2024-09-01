@@ -1,6 +1,6 @@
 
 
-export interface BuildingDTO {
+export type BuildingDTO = {
   id: number;
   commercialType: string;
   price: number;

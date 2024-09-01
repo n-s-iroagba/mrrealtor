@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
-import { State, LocalGovernmentArea, District, BuildingSearchOptions } from '../../../types/dtos';
-import { BuildingDTO } from '../../../features/listing/types/dto';
+
 import { apartmentTypesUrl, bestAmmenitiesUrl, districtsUrl, localGovernmentAreaUrl, otherAmmenitiesUrl, searchBuildingsUrl, statesUrl } from '../../../constants/urls';
+
+import { BuildingDTO } from '../../../features/listing/types/responseDto';
+import { BuildingSearchOptions, District, LocalGovernmentArea, State } from '../../../features/types/dtos';
 
 // Custom Hook for fetching states
 const useFetchStates = () => {

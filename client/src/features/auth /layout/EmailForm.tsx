@@ -4,12 +4,14 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { Spinner } from 'react-bootstrap';
-import { required } from '../../../common/components/required';
+
 import '../styles/auth.styles.css'
-import ErrorMessage from '../../../common/components/ErrorMessage';
-import { requestNewPasswordUrl } from '../../../constants/constants';
-import { postData } from '../../../common/utils/apiUtils';
 import { changePasswordTokenKey } from '../../../constants/tokenKeys';
+import { requestNewPasswordUrl } from '../../../constants/urls';
+import ErrorMessage from '../../common/components/ErrorMessage';
+import { required } from '../../common/components/required';
+import { postData } from '../../common/utils/apiUtils';
+
 
 const EmailForm :React.FC = () => {
   const [validated, setValidated] = useState<boolean>(false)

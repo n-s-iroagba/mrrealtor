@@ -1,7 +1,7 @@
 import React from 'react'
 
 import '../styles/common.styles.css'
-import { companyName } from '../../constants/constants';
+import { companyName } from '../../../constants/constants';
 
 
 const MiniFooter: React.FC = () => {

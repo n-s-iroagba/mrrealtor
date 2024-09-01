@@ -1,7 +1,8 @@
 
 import React from 'react';
 import { Dropdown, Row, Col } from 'react-bootstrap';
-import { BuildingSearchOptions, District, LocalGovernmentArea, State } from '../../../types/dtos';
+import { BuildingSearchOptions, State, LocalGovernmentArea, District } from '../../types/dtos';
+
 
 
 interface GroupedDropdownProps {

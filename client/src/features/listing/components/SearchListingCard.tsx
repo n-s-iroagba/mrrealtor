@@ -4,9 +4,10 @@ import React, { useEffect, useState } from "react";
 import { Card, Col, Image, Row } from "react-bootstrap";
 import "../styles/listing.styles.css";
 import { ContactRealtorButton, ViewBuildingButton } from "./Buttons";
-import { BuildingDTO } from "../types/dto";
-import { daysFromToday, numberWithCommas } from "../../../common/utils/utils";
+
 import axios from 'axios';
+import { daysFromToday, numberWithCommas } from "../../common/utils/utils";
+import { BuildingDTO } from "../types/responseDto";
 
 const SearchListingCard: React.FC<{ data: BuildingDTO; clientId: number }> = ({
   data,

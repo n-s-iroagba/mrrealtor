@@ -1,13 +1,16 @@
 import React from 'react'
-import NavbarComponent from '../../../common/components/NavbarComponent'
 import '../styles/home.styles.css'
 import { Col, Row } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import { CommercialPurpose } from '../../../common/types/commonTypes'
+import NavbarComponent from '../../common/components/NavbarComponent'
+import useIsLargeScreen from '../../common/hooks/useIsLargeScreen'
+import { CommercialPurpose } from '../../common/types/commonTypes'
+import HomeSearchBar from '../components/HomeSearchBar'
 
 
 
 const Header: React.FC = () => {
+ const isLargeScreen = useIsLargeScreen()
 const navigate = useNavigate()
   
 const navigateToSearch = (commercialPurpose:CommercialPurpose) => {
@@ -25,7 +28,7 @@ const navigateToDasboard =()=>{
       <div className='header-background d-flex flex-column align-items-center px-3'>
 
         <h1>The #1 site real estate <span className="break">professionals trust.</span></h1>
-
+{isLargeScreen?<>
         <Row className='w-75 d-flex gy-1 gx-1 justify-content-center align-items-center mt-4'>
           <Col md={3} xs={12}className=' d-flex justify-content-center'>
             <button onClick={()=>{navigateToSearch(CommercialPurpose.SALE)}} className='w-100 header-button bg-light'>Buy</button>
@@ -41,21 +44,11 @@ const navigateToDasboard =()=>{
           </Col>
         </Row>
 
-        {/*          
-          <InputGroup className='home-searchbar'>
-            <Form.Control
-              required
-              type='string'
-              name="confirmPassword"
-              value= ''
-              onChange={(e) => handleSearchChange()}
-              className=" custom-input  bg-transparent form-control text-light "
-            />
-            <InputGroup.Text onClick={() => navigateToSearch()}>
-              <FontAwesomeIcon icon={faSearchLocation} />
-            </InputGroup.Text>
-          </InputGroup>
-           */}
+       </>
+       : <>
+       <HomeSearchBar/>
+       </>
+}
       </div>
     </header>
 

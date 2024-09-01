@@ -5,8 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faInstagram, faTiktok, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { companySupportEmail, companySupportPhoneNumber } from '../../constants/constants';
-import { companyFacebookLink, companyTwitterLink, companyInstagramLink, companyTiktokLink } from '../../constants/urls';
+import { companySupportEmail, companySupportPhoneNumber } from '../../../constants/constants';
+import { companyFacebookLink, companyTwitterLink, companyInstagramLink, companyTiktokLink } from '../../../constants/urls';
 
 const Footer: React.FC = () => {
   return (

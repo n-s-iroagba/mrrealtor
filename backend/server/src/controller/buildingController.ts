@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { BuildingSearchOptions } from "../types/dtos";
+
 import { Op } from "sequelize";
 import Building from "../models/Building.Model";
 import { District } from "../models/District.Model";
@@ -10,6 +10,8 @@ import upload from "../multer/upload";
 import { BuildingLikes } from "../models/BuildingLikes.Model";
 import sharp from 'sharp';
 import path from 'path';
+import { ListBuildingProps } from "../types/requestDto";
+import { BuildingSearchOptions } from "../types/searchOptions";
 
 // Utility function to apply watermark
 const applyWatermark = async (inputPath: string, outputPath: string, watermarkText: string) => {
@@ -64,19 +66,19 @@ uploadFiles(req, res, async (err: any) => {
         commercialType,
         price,
         buildingType,
-        firstLineAddress,
         salesPitch,
         numberOfRooms,
         bestAmenity,
         otherAmenity,
         location
-      } = req.body;
+      } = req.body as ListBuildingProps;
 
-      if (!location?.district || !location?.localGovernmentArea || !location?.state) {
+      if (!location?.district || !location?.localGovernmentArea || !location?.state||location?.firstLineAddress) {
        
         return res.status(400).json({ message: "Location information is incomplete." });
       }
-      console.log(req.body)
+
+      
       const files = req.files as Express.Multer.File[];
       const images = JSON.stringify(files?.map((file) => file.path) || []);
       console.log('Uploaded files:', files);
@@ -135,6 +137,21 @@ export const getAllBuildings = async (req: Request, res: Response) => {
   } catch (err) {
     console.error("Error retrieving properties:", err);
     return res.status(500).json({ message: "Error retrieving properties" });
+  }
+};
+export const getBuildingById = async (req: Request, res: Response) => {//get building for update
+  try {
+    const { id } = req.params;
+    const building = await Building.findByPk(id);
+    if (building) {
+      const likes = await countBuildingLikes(building.id);
+      return res.status(200).json({ ...building.get(), likes });
+    } else {
+      return res.status(404).json({ message: "Building not found" });
+    }
+  } catch (err) {
+    console.error("Error retrieving Building:", err);
+    return res.status(500).json({ message: "Error retrieving Building" });
   }
 };
 

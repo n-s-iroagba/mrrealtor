@@ -6,17 +6,20 @@ import Row from 'react-bootstrap/Row';
 import Select from 'react-select';
 import { useMemo } from 'react';
 
-import { required } from '../../../common/components/required';
+
 import { AuthContext } from '../context/AuthContext';
 import { InputGroup, Spinner } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PasswordStrengthMeter from '../components/PasswordStrengthMeter';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import ErrorMessage from '../../../common/components/ErrorMessage';
+
 import { useNavigate } from 'react-router-dom';
-import { createRealtorUrl } from '../../../constants/constants';
+
 import countryList from 'react-select-country-list'
 import '../styles/auth.styles.css'
+import { createRealtorUrl } from '../../../constants/urls';
+import ErrorMessage from '../../common/components/ErrorMessage';
+import { required } from '../../common/components/required';
 const SignUpForm: React.FC = () => {
   const options = useMemo(() => countryList().getData(), [])
   const { realtorData,

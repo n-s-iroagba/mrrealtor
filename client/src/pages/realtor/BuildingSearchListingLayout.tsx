@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { Row, Col } from "react-bootstrap";
-import LoadingSpinner from "../../common/components/LoadingSpinner";
-import Logo from "../../common/components/Logo";
-import MiniFooter from "../../common/components/MiniFooter";
-import GroupedDropdown from "../../features/listing/components/GroupedDropdown";
-import './styles/pages.realtor.css';
-import { BuildingSearchOptions, District, LocalGovernmentArea, State } from "../../types/dtos";
-import { stateKey } from "../../constants/tokenKeys";
-import { commercialType } from "../../types/enums";
 import { useParams } from "react-router-dom";
 import SearchListingCard from "../../features/listing/components/SearchListingCard";
 import { useFetchStates, useFetchLocalGovernmentAreas, useFetchDistricts, useFetchBuildings, useFetchApartmentTypes, useFetchBestAmenities, useFetchOtherAmenities } from "./hooks/useFetchData";
+import { stateKey } from "../../constants/tokenKeys";
+import LoadingSpinner from "../../features/common/components/LoadingSpinner";
+import Logo from "../../features/common/components/Logo";
+import MiniFooter from "../../features/common/components/MiniFooter";
+import GroupedDropdown from "../../features/listing/components/GroupedDropdown";
+import { commercialType } from "../../features/listing/types/types";
+import { BuildingSearchOptions, District, LocalGovernmentArea, State } from "../../features/types/dtos";
 
 const BuildingSearchListing: React.FC = () => {
   const { commercialPurpose } = useParams<{ commercialPurpose: string }>();

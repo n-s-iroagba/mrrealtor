@@ -1,4 +1,5 @@
-import Footer from "../../common/components/Footer"
+
+import Footer from "../../features/common/components/Footer"
 import Header from "../../features/home/layout/Header"
 import ListingCategory from "../../features/home/layout/ListingCategory"
 import ServiceList from "../../features/home/layout/ServicesList"

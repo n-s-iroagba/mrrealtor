@@ -2,7 +2,8 @@ import React from 'react'
 import LoginForm from '../../features/auth /layout/LoginForm'
 import AuthOption, { GoogleButton } from '../../features/auth /components/AuthOption'
 import './styles/auth.page.css'
-import MiniFooter from '../../common/components/MiniFooter'
+import MiniFooter from '../../features/common/components/MiniFooter'
+
 
 
 

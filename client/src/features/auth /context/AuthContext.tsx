@@ -9,7 +9,7 @@ import React, {
 } from "react";
 
 import { doPasswordsMatch } from "../utils/utils";
-import { postChangePasswordData, postData } from "../../../common/utils/apiUtils";
+
 import {
   AdminData,
   AuthContextType,
@@ -18,7 +18,7 @@ import {
   NewPasswordData
 } from "../types/authTypes";
 
-import { extractErrorCode } from "../../../common/utils/utils";
+
 
 import { getIdFromChangePasswordToken, handleEmailVerification, handleLoginError, handleLoginResponse, handleSuccessfulLogin, handleValidation, validateSecretCode } from "../helpers/helpers";
 
@@ -26,6 +26,8 @@ import { AxiosResponse } from "axios";
 import { validatePassword } from "../util/util";
 import { notAuthorisedErrorMessage } from "../../../constants/errorMessages";
 import { newPasswordRoute, loginUrl } from "../../../constants/urls";
+import { extractErrorCode } from "../../common/utils/utils";
+import { postChangePasswordData, postData } from "../../common/utils/apiUtils";
 
 
 export const AuthContext = createContext<AuthContextType | undefined>(
