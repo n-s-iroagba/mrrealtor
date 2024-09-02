@@ -50,7 +50,7 @@ export const router = createBrowserRouter([
 
     {
         path: '/building/:commercialType',
-        element: <BuildingSearchListing/>
+        element: <BuildingSearchListing id={1}/>
     },
     
     {

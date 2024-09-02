@@ -11,6 +11,7 @@ import ErrorMessage from "../../common/components/ErrorMessage";
 import { required } from "../../common/components/required";
 import { postFormData } from "../../common/utils/apiUtils";
 import { ListBuildingProps } from "../types/requestDto";
+import { getStateCodeByName } from "../helpers/helper";
 
 
 const NewBuildingListingForm: React.FC = () => {
@@ -47,14 +48,7 @@ const NewBuildingListingForm: React.FC = () => {
   const statesOption = getNigeriaStates().map((state) => state.name);
  
 
-  function getStateCodeByName(stateName: string): string | undefined {
-    const states = getNigeriaStates().filter((state) => ({
-      name: state.name,
-      code: state.code,
-    }));
-    const state = states.find((state) => state.name === stateName);
-    return state ? state.code : undefined;
-  }
+
 
 
 

@@ -1,8 +1,9 @@
 import React from 'react'
 import ListingCategoryCard from '../components/ListingCategoryCard'
 import { Col, Row } from 'react-bootstrap'
-import { CommercialPurpose } from '../../../common/types/commonTypes'
+
 import { useNavigate } from 'react-router-dom'
+import { CommercialPurpose } from '../../common/types/commonTypes'
 
 const ListingCategory:React.FC<{city:string}> = ({city})=>{
     const navigate = useNavigate();

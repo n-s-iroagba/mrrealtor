@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import { Row, Col } from "react-bootstrap";
+import GroupedDropdown from "../../features/listing/components/GroupedDropdown";
+import './styles/pages.realtor.css';
+import { stateKey } from "../../constants/tokenKeys";
 import { useParams } from "react-router-dom";
 import SearchListingCard from "../../features/listing/components/SearchListingCard";
 import { useFetchStates, useFetchLocalGovernmentAreas, useFetchDistricts, useFetchBuildings, useFetchApartmentTypes, useFetchBestAmenities, useFetchOtherAmenities } from "./hooks/useFetchData";
-import { stateKey } from "../../constants/tokenKeys";
 import LoadingSpinner from "../../features/common/components/LoadingSpinner";
 import Logo from "../../features/common/components/Logo";
 import MiniFooter from "../../features/common/components/MiniFooter";
-import GroupedDropdown from "../../features/listing/components/GroupedDropdown";
-import { commercialType } from "../../features/listing/types/types";
-import { BuildingSearchOptions, District, LocalGovernmentArea, State } from "../../features/types/dtos";
+import { State, BuildingSearchOptions, District, LocalGovernmentArea } from "../../features/types/dtos";
+import { commercialType } from "../../features/types/enums";
+;
 
-const BuildingSearchListing: React.FC = () => {
+const BuildingSearchListing: React.FC<{id:number}> = ({id}) => {
   const { commercialPurpose } = useParams<{ commercialPurpose: string }>();
   const initialCommercialType: commercialType = commercialPurpose as commercialType;
 
@@ -33,7 +35,7 @@ const BuildingSearchListing: React.FC = () => {
     localGovernmentArea: null,
     district: null,
     state: state,
-  });
+  })
 
   const { states, loading: statesLoading, error: statesError } = useFetchStates();
   const { localGovernmentAreas, setLocalGovernmentAreas, loading: lgasLoading, error: lgasError } = useFetchLocalGovernmentAreas();
@@ -123,7 +125,7 @@ const BuildingSearchListing: React.FC = () => {
         <Row className='h-100 gy-3'>
           {assets?.map((asset, index) => (
             <Col xs={12} md={6} lg={4} key={index}>
-              <SearchListingCard data={asset} clientId={0} />
+              <SearchListingCard data={asset} clientId={id} />
             </Col>
           ))}
         </Row>
@@ -133,7 +135,6 @@ const BuildingSearchListing: React.FC = () => {
       </div>
       <MiniFooter />
     </>
-  );
-};
-
+)
+}
 export default BuildingSearchListing;

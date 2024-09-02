@@ -155,21 +155,7 @@ export const getBuildingById = async (req: Request, res: Response) => {//get bui
   }
 };
 
-export const getBuildingById = async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-    const building = await Building.findByPk(id);
-    if (building) {
-      const likes = await countBuildingLikes(building.id);
-      return res.status(200).json({ ...building.get(), likes });
-    } else {
-      return res.status(404).json({ message: "Building not found" });
-    }
-  } catch (err) {
-    console.error("Error retrieving Building:", err);
-    return res.status(500).json({ message: "Error retrieving Building" });
-  }
-};
+
 
 export const getAllBuildingsForARealtor = async (req: Request, res: Response) => {
   const { realtorId } = req.params;
