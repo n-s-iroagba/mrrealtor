@@ -101,7 +101,7 @@ const BuildingSearchListing: React.FC<{id:number}> = ({id}) => {
         </div>
         <div className="line"></div>
         <h4 className="my-2">
-          Showing Houses for {selectedOptions.commercialType} in {state?.name || 'Nigeria'}
+          Showing Houses  {selectedOptions.commercialType} in {state?.name || 'Nigeria'}
         </h4>
         <div>
           <Row className="gy-3 mb-3">

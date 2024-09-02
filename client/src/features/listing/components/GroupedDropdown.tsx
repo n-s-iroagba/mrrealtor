@@ -7,16 +7,16 @@ import { BuildingSearchOptions, State, LocalGovernmentArea, District } from '../
 
 interface GroupedDropdownProps {
   apartmentTypes: string[];
-  selectedOptions:BuildingSearchOptions;
+  selectedOptions: BuildingSearchOptions;
   states: State[];
   localGovernmentAreas: LocalGovernmentArea[];
-  districts:District[]
-  otherAmmenities:string[]
-  bestAmmenities : string[]
-  handleSelect: (key:string ,value: string|District ) => void;
-  handlePriceChange: (key:string,value:number) => void;
-  handleChangeState: (state:State) => void;
-  handleChangeLocalGovernmentArea: (lga:LocalGovernmentArea) => void;
+  districts: District[]
+  otherAmmenities: string[]
+  bestAmmenities: string[]
+  handleSelect: (key: string, value: string | District) => void;
+  handlePriceChange: (key: string, value: number) => void;
+  handleChangeState: (state: State) => void;
+  handleChangeLocalGovernmentArea: (lga: LocalGovernmentArea) => void;
 }
 
 const GroupedDropdown: React.FC<GroupedDropdownProps> = ({
@@ -33,16 +33,16 @@ const GroupedDropdown: React.FC<GroupedDropdownProps> = ({
   otherAmmenities,
   selectedOptions
 }) => {
-  
+
   return (
     <Row className='gx-1 px-1'>
-       <Col xs={4}>
+      <Col xs={6}>
         <Dropdown>
           <Dropdown.Toggle variant="transparent" id="dropdown-commercial-type">
-          <small>{selectedOptions.state?.name||'State'}</small>  
+            <small>{selectedOptions.state?.name || 'State'}</small>
           </Dropdown.Toggle>
           <Dropdown.Menu>
-          {states.map((state) => (
+            {states.map((state) => (
               <Dropdown.Item key={state.id} onClick={() => handleChangeState(state)}>
                 {state.name}
               </Dropdown.Item>
@@ -51,10 +51,10 @@ const GroupedDropdown: React.FC<GroupedDropdownProps> = ({
         </Dropdown>
       </Col>
 
-      <Col xs={4}>
+      <Col xs={6}>
         <Dropdown>
           <Dropdown.Toggle variant="transparent" id="dropdown-apartment-lga">
-          <small>{selectedOptions.localGovernmentArea?.name||'Local Government Area'}</small>
+            <small>{selectedOptions.localGovernmentArea?.name || 'Local Government Area'}</small>
           </Dropdown.Toggle>
           <Dropdown.Menu>
             {localGovernmentAreas.map((lga) => (
@@ -66,10 +66,10 @@ const GroupedDropdown: React.FC<GroupedDropdownProps> = ({
         </Dropdown>
       </Col>
 
-      <Col xs={4}>
+      <Col xs={6}>
         <Dropdown>
           <Dropdown.Toggle variant="transparent" id="dropdown-price-ranges">
-          <small>{selectedOptions.district?.name|| 'District'}</small>
+            <small>{selectedOptions.district?.name || 'District'}</small>
           </Dropdown.Toggle>
           <Dropdown.Menu>
             {districts.map((district) => (
@@ -80,10 +80,10 @@ const GroupedDropdown: React.FC<GroupedDropdownProps> = ({
           </Dropdown.Menu>
         </Dropdown>
       </Col>
-      <Col xs={4}>
+      <Col xs={6}>
         <Dropdown>
           <Dropdown.Toggle variant="transparent" id="dropdown-commercial-type">
-          <small>{selectedOptions.commercialType||'Rent Or Buy'}</small>  
+            <small>{selectedOptions.commercialType || 'Rent Or Buy'}</small>
           </Dropdown.Toggle>
           <Dropdown.Menu>
             <Dropdown.Item onClick={() => handleSelect('CommercialType', 'Rent')}>Rent</Dropdown.Item>
@@ -92,13 +92,13 @@ const GroupedDropdown: React.FC<GroupedDropdownProps> = ({
         </Dropdown>
       </Col>
 
-      <Col xs={4}>
+      <Col xs={6}>
         <Dropdown>
           <Dropdown.Toggle variant="transparent" id="dropdown-apartment-type">
-          <small>{selectedOptions.apartmentType||' Building Types'}</small>
+            <small>{selectedOptions.apartmentType || ' Building Types'}</small>
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            {apartmentTypes.map((type,index) => (
+            {apartmentTypes.map((type, index) => (
               <Dropdown.Item key={index} onClick={() => handleSelect('apartmentType', type)}>
                 {type}
               </Dropdown.Item>
@@ -107,38 +107,38 @@ const GroupedDropdown: React.FC<GroupedDropdownProps> = ({
         </Dropdown>
       </Col>
 
-      <Col xs={4}>
+      <Col xs={6}>
         <Dropdown>
           <Dropdown.Toggle variant="transparent" id="dropdown-price-ranges">
-          <small> Price Range</small>
+            <small> Price Range</small>
           </Dropdown.Toggle>
         </Dropdown>
       </Col>
 
-      <Col xs={4}>
+      <Col xs={6}>
         <Dropdown>
           <Dropdown.Toggle variant="transparent" id="dropdown-more-options">
-          <small>{selectedOptions.bestAmmenity|| 'Most Important Ammenity'}</small>
+            <small>{selectedOptions.bestAmmenity || 'Most Important Ammenity'}</small>
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            {bestAmmenities.map((option,index) => (
+            {bestAmmenities.map((option, index) => (
               <Dropdown.Item key={index} onClick={() => handleSelect('MoreOption', option)}>
                 {option}
               </Dropdown.Item>
             ))}
           </Dropdown.Menu>
         </Dropdown>
-</Col>
-        <Col xs={4}>
+      </Col>
+      <Col xs={6}>
         <Dropdown>
           <Dropdown.Toggle variant="transparent" id="dropdown-more-options">
-          <small> {selectedOptions.otherAmmenity||'Other Ammenity'}</small>
+            <small> {selectedOptions.otherAmmenity || 'Other Ammenity'}</small>
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            {otherAmmenities.map((option,index) => (
+            {otherAmmenities.map((option, index) => (
               <Dropdown.Item key={index} onClick={() => handleSelect('MoreOption', option)}>
-              {option}
-            </Dropdown.Item>
+                {option}
+              </Dropdown.Item>
             ))}
           </Dropdown.Menu>
         </Dropdown>
