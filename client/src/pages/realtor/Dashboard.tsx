@@ -5,7 +5,7 @@ import React from 'react';
 import DashboardButton from '../../features/dashboard/components/DashboardButton';
 
 import { faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
-import logo  from '../../assets/logo/blacklogo.png'
+
 import { Col, Row } from 'react-bootstrap';
 
 import './styles/pages.realtor.css'
@@ -13,6 +13,7 @@ import './styles/pages.realtor.css'
 import DashboardDropdown from '../../features/dashboard/components/DashboardDropdown';
 import NotificationLayout from '../../features/notification/layout/NotificationLayout';
 import MiniFooter from '../../features/common/components/MiniFooter';
+import Logo from '../../features/common/components/Logo';
 const navItems = [
 
 
@@ -38,7 +39,7 @@ const Dashboard: React.FC = () => {
        <NotificationLayout modalVisibility={false}/>
       </Col>
       <Col xs={4} className="d-flex justify-content-center">
-        <img className="w-100 h-100" src={logo} alt="logo" />
+      <Logo/>
       </Col>
       <Col xs={4} className="d-flex justify-content-end">
       <DashboardDropdown/>

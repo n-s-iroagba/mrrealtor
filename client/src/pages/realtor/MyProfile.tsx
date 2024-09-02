@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { Container, Row, Col, Button, Modal, Form } from 'react-bootstrap';
 import './styles/pages.realtor.css';
-import profilepic from '../../assets/logo/blacklogo.png';
+import profilepic from '../../features/common/assets/logo/blacklogo.png';
 import RealtorDetails from '../../features/profile/layout/RealtorDetails';
 
 const MyProfile: React.FC = () => {
