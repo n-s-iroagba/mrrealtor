@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Container, ListGroup, ListGroupItem, Badge, Row, Col } from 'react-bootstrap';
+import React from 'react';
+import {  ListGroupItem, Badge,  } from 'react-bootstrap';
 
 interface ChatItemProps {
   clientName: string;
@@ -7,9 +7,9 @@ interface ChatItemProps {
   latestMessage: string;
 }
 
-interface ChatListProps {
-  currentRealtorId: number;
-}
+// interface ChatListProps {
+//   currentRealtorId: number;
+// }
 
 const ChatItem: React.FC<ChatItemProps> = ({ clientName, unreadMessagesCount, latestMessage }) => {
   return (
