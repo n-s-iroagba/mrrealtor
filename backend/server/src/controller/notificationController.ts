@@ -1,13 +1,13 @@
-import { Land } from '../land/Land.Model';
-import Property from '../property/Property.Model';
-import Notification from './Notification.Model';
+import Building from "../models/Building.Model";
+import { Land } from "../models/Land.Model";
+import Notification from "../models/Notification.Model";
 
 export const getNotificationsByRecipientId = async (recipientId: number) => {
   try {
     const notifications = await Notification.findAll({
       where: { recipientId },
       include: [
-        { model: Property, as: 'relatedProperty' },
+        { model: Building, as: 'building' },
         { model: Land, as: 'relatedLand' }
       ],
       order: [['createdAt', 'DESC']],

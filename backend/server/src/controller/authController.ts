@@ -7,8 +7,9 @@ import { generateEmailVerificationToken, createLoginJWT, decodeJWT, generateChan
 import { Admin } from '../models/Admin.Model';
 import { Realtor } from '../models/Realtor.Model';
 import { sendVerificationEmail, sendPasswordResetEmail } from '../service/mailService';
-import { Role } from '../types/types';
+
 import { customError } from '../utils/utils';
+import { Role } from '../types/authTypes';
 
 
 

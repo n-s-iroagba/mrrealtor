@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, } from 'react';
 
 
 import { useNavigate } from 'react-router-dom';
 
 
-const PrivateRoute: React.FC<{ Component: React.FC<any> }> = ({ Component }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
-  const [username,setUsername] = useState<string>('')
-  const [id,setId]= useState<number>(0)
+const PrivateRoute: React.FC<{ Component: React.FC }> = ({ Component }) => {
+  // const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
+  // const [username,setUsername] = useState<string>('')
+  // const [id,setId]= useState<number>(0)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const PrivateRoute: React.FC<{ Component: React.FC<any> }> = ({ Component }) => 
 
   return (
 
-      <Component username={username} id={id}/> 
+      <Component/> 
     
   );
 };

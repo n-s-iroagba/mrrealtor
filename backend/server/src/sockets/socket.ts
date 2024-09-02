@@ -39,15 +39,15 @@ const handleChatSockets = (io: SocketIOServer) => {
       console.log('received: %s', payload);
 
       const parsedMessage = JSON.parse(payload);
-      const { reciepientId, message, senderId, propertyType, propertyId } = parsedMessage;
+      const { recepientId, message, senderId, propertyType, propertyId } = parsedMessage;
 
       try {
-        const recipient = await Realtor.findByPk(reciepientId);
+        const recipient = await Realtor.findByPk(recepientId);
         if (recipient && recipient.socketId) {
           let chat = await Chat.findOne({
             where: {
               realtorId: senderId,
-              clientId: reciepientId,
+              clientId: recepientId,
               propertyInQuestionId: propertyId,
               propertyType
             }
@@ -56,7 +56,7 @@ const handleChatSockets = (io: SocketIOServer) => {
           if (!chat) {
             chat = await Chat.create({
               clientId: senderId,
-              realtorId: reciepientId,
+              realtorId: recepientId,
               propertyInQuestionId: propertyId,
               propertyType
             });
@@ -64,7 +64,7 @@ const handleChatSockets = (io: SocketIOServer) => {
 
           await Message.create({
             senderId,
-            reciepientId,
+            recepientId,
             message,
             timeStamp: new Date(),
             chatId: chat.id,
@@ -73,7 +73,7 @@ const handleChatSockets = (io: SocketIOServer) => {
           const allChat = await Chat.findAll({
             where: {
               realtorId: senderId,
-              clientId: reciepientId,
+              clientId: recepientId,
               propertyInQuestionId: propertyId,
               propertyType
             }
@@ -84,7 +84,7 @@ const handleChatSockets = (io: SocketIOServer) => {
           io.to(recipient.socketId).emit('receiveChat', allChat);
 
         } else {
-          console.log(`Recipient with id: ${reciepientId} not found or not connected`);
+          console.log(`Recipient with id: ${recepientId} not found or not connected`);
         }
       } catch (error) {
         console.error('Error sending message:', error);

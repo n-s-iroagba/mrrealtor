@@ -8,7 +8,7 @@ import { Chat } from './Chat.Model';
 export class Message extends Model<InferAttributes<Message>, InferCreationAttributes<Message>> {
   declare id: CreationOptional<number>;
   declare senderId: number;
-  declare reciepientId: number;
+  declare recepientId: number;
   declare message: string;
   declare timeStamp: Date;
   declare chatId : ForeignKey<Chat['id']>
@@ -30,7 +30,7 @@ Message.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    reciepientId: {
+    recepientId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },

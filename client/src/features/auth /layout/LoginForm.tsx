@@ -6,10 +6,11 @@ import Row from 'react-bootstrap/Row';
 import { InputGroup, Spinner } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import ErrorMessage from '../../../common/components/ErrorMessage';
+
 
 import '../styles/auth.styles.css'
 import { AuthContext } from '../context/AuthContext';
+import ErrorMessage from '../../common/components/ErrorMessage';
 const LoginForm: React.FC = () => {
   const { 
     submitting,

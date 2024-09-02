@@ -5,7 +5,8 @@ import rentImage from '../assets/serviceListImages/serviceRent.png'
 import advertImage from '../assets/serviceListImages/serviceAdvertise.png'
 import buyImage from '../assets/serviceListImages/serviceBuy.png'
 import { useNavigate } from 'react-router-dom';
-import { CommercialPurpose } from '../../../common/types/commonTypes';
+import { CommercialPurpose } from '../../common/types/commonTypes';
+
 const ServiceList = () => {
   const navigate = useNavigate()
     const data = [

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { getAllBuildingForRealtorRoute, getAllBuildingRoute, getBuildingByIdRoute, registerBuildingRoute } from "../config/apiRoutes";
-import { createBuilding, getAllBuildings, getAllBuildingsForARealtor, getBuildingById } from "../controller/buildingController";
+import { createBuilding, getAllBuildings, getAllBuildingsForARealtor, getBuildingById, searchAllBuildings } from "../controller/buildingController";
 import { getStates, getLocalgovernmentAreas, getDistricts } from "../controller/locationController";
 const router: Router = Router();
 router.get('/', async (req, res) => {
@@ -13,7 +13,7 @@ router.get(getAllBuildingRoute,getAllBuildings)
 router.get('/states',getStates)
 router.get('/local-government-areas',getLocalgovernmentAreas)
 router.get('/districts',getDistricts)
-
+router.post ('/building/sale',searchAllBuildings) //
 export default router;
 
 

@@ -3,14 +3,16 @@ import { useNavigate} from 'react-router-dom'
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import { InputGroup, Spinner } from 'react-bootstrap';
-import { required } from '../../../common/components/required';
+
 import '../styles/auth.styles.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import ErrorMessage from '../../../common/components/ErrorMessage';
+
 import PasswordStrengthMeter from '../components/PasswordStrengthMeter';
 import { AuthContext } from '../context/AuthContext';
 import { changePasswordTokenKey } from '../../../constants/tokenKeys';
+import ErrorMessage from '../../common/components/ErrorMessage';
+import { required } from '../../common/components/required';
 
 const PasswordForm: React.FC = ()=>{
   const navigate = useNavigate()

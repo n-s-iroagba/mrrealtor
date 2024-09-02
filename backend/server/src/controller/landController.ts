@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
-import { Land } from './Land.Model';
+
 import { Op } from 'sequelize';
 import upload from '../multer/upload';
+import { Land } from '../models/Land.Model';
 
 
 const uploadFiles = upload.array('images', 10); // Adjust the maximum number of files

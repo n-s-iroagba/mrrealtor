@@ -25,16 +25,16 @@ initializeSockets(server);
 cron.schedule('0 * * * *', sendReminders);
 
 
-// const PORT = 7000;
-// sequelize
-//   .sync({
-//     //alter:true,
-//   force:true
-//   })
-//   .then(() => console.log('models formed'))
-//   .catch((err:any) => console.log(err));
-// server.listen(PORT, () => {
-//   console.log(`Server is listening on port ${PORT}`);
-// });
+const PORT = 7000;
+sequelize
+  .sync({
+    //alter:true,
+  force:true
+  })
+  .then(() => console.log('models formed'))
+  .catch((err:any) => console.log(err));
+server.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
+});
 
 export default app;

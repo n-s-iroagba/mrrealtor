@@ -1,7 +1,7 @@
 // src/components/RealtorAccordion.tsx
 import React, { useState } from 'react';
 import { Accordion, Button, Card, Col, Form, InputGroup, Row } from 'react-bootstrap';
-import profilepic from '../../../assets/logo/blacklogo.png'
+import profilepic from '../../../features/common/assets/logo/blacklogo.png'
 import '../styles/realtor.styles.css'
 interface Realtor {
   id: number;
