@@ -3,8 +3,9 @@ import { jwtDecode } from "jwt-decode";
 import { LoginToken, VerificationToken, ChangePasswordToken,UserData, Role } from "../types/authTypes";
 import { changePasswordTokenKey, LoginTokenKey, userId, verificationTokenKey } from "../../../constants/tokenKeys";
 import { AxiosResponse } from "axios";
-import { extractErrorCode } from "../../../common/utils/utils";
+
 import { fillInAllFieldsErrorMessage, wrongSecretCodeErrorMessage } from "../../../constants/errorMessages";
+import { extractErrorCode } from "../../common/utils/utils";
 
 export const decodeLoginToken = (): LoginToken | null => {
   const token = localStorage.getItem(LoginTokenKey);
