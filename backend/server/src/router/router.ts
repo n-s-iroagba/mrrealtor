@@ -13,7 +13,7 @@ router.get(getAllBuildingRoute,getAllBuildings)
 router.get('/states',getStates)
 router.get('/local-government-areas',getLocalgovernmentAreas)
 router.get('/districts',getDistricts)
-router.post ('/building/sale',searchAllBuildings) //
+router.post ('/search-buildings',searchAllBuildings) //
 export default router;
 
 

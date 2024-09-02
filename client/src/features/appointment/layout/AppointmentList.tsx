@@ -1,31 +1,31 @@
 // src/components/AppointmentList.tsx
-import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Spinner, Alert } from 'react-bootstrap';
-import axios from 'axios';
+import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+// import axios from 'axios';
 import AppointmentItem from '../components/AppointmentItem';
 
-interface Appointment {
-  id: number;
-  date: string;
-  location: string;
-  realtor: {
-    firstName: string;
-    lastName: string;
-  };
-  client: {
-    firstName: string;
-    lastName: string;
-  };
-  propertyInQuestion: {
-    district: string;
-  };
-  propertyType: 'property' | 'land';
-}
+// interface Appointment {
+//   id: number;
+//   date: string;
+//   location: string;
+//   realtor: {
+//     firstName: string;
+//     lastName: string;
+//   };
+//   client: {
+//     firstName: string;
+//     lastName: string;
+//   };
+//   propertyInQuestion: {
+//     district: string;
+//   };
+//   propertyType: 'property' | 'land';
+// }
 
 const AppointmentList: React.FC = () => {
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState<string | null>(null);
 
   // useEffect(() => {
    // const [appointments, setAppointments] = useState<Appointment[]>([]);
@@ -99,21 +99,21 @@ const appointments = [
 ];
 
 
-  if (loading) {
-    return (
-      <Container className="text-center mt-5">
-        <Spinner animation="border" />
-      </Container>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <Container className="text-center mt-5">
+  //       <Spinner animation="border" />
+  //     </Container>
+  //   );
+  // }
 
-  if (error) {
-    return (
-      <Container className="text-center mt-5">
-        <Alert variant="danger">{error}</Alert>
-      </Container>
-    );
-  }
+  // if (error) {
+  //   return (
+  //     <Container className="text-center mt-5">
+  //       <Alert variant="danger">{error}</Alert>
+  //     </Container>
+  //   );
+  // }
 
   return (
     <Container className="mt-5">
