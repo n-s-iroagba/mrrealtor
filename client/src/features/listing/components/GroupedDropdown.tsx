@@ -36,7 +36,7 @@ const GroupedDropdown: React.FC<GroupedDropdownProps> = ({
 
   return (
     <Row className='gx-1 px-1'>
-      <Col xs={6}>
+      <Col xs={6} lg={3}>
         <Dropdown>
           <Dropdown.Toggle variant="transparent" id="dropdown-commercial-type">
             <small>{selectedOptions.state?.name || 'State'}</small>
@@ -51,7 +51,7 @@ const GroupedDropdown: React.FC<GroupedDropdownProps> = ({
         </Dropdown>
       </Col>
 
-      <Col xs={6}>
+      <Col xs={6} lg={3}>
         <Dropdown>
           <Dropdown.Toggle variant="transparent" id="dropdown-apartment-lga">
             <small>{selectedOptions.localGovernmentArea?.name || 'Local Government Area'}</small>
@@ -66,7 +66,7 @@ const GroupedDropdown: React.FC<GroupedDropdownProps> = ({
         </Dropdown>
       </Col>
 
-      <Col xs={6}>
+      <Col xs={6} lg={3}>
         <Dropdown>
           <Dropdown.Toggle variant="transparent" id="dropdown-price-ranges">
             <small>{selectedOptions.district?.name || 'District'}</small>
@@ -80,7 +80,7 @@ const GroupedDropdown: React.FC<GroupedDropdownProps> = ({
           </Dropdown.Menu>
         </Dropdown>
       </Col>
-      <Col xs={6}>
+      <Col xs={6} lg={3}>
         <Dropdown>
           <Dropdown.Toggle variant="transparent" id="dropdown-commercial-type">
             <small>{selectedOptions.commercialType || 'Rent Or Buy'}</small>
@@ -92,7 +92,7 @@ const GroupedDropdown: React.FC<GroupedDropdownProps> = ({
         </Dropdown>
       </Col>
 
-      <Col xs={6}>
+      <Col xs={6} lg={3}>
         <Dropdown>
           <Dropdown.Toggle variant="transparent" id="dropdown-apartment-type">
             <small>{selectedOptions.apartmentType || ' Building Types'}</small>
@@ -107,7 +107,7 @@ const GroupedDropdown: React.FC<GroupedDropdownProps> = ({
         </Dropdown>
       </Col>
 
-      <Col xs={6}>
+      <Col xs={6} lg={3}>
         <Dropdown>
           <Dropdown.Toggle variant="transparent" id="dropdown-price-ranges">
             <small> Price Range</small>
@@ -115,7 +115,7 @@ const GroupedDropdown: React.FC<GroupedDropdownProps> = ({
         </Dropdown>
       </Col>
 
-      <Col xs={6}>
+      <Col xs={6} lg={3}>
         <Dropdown>
           <Dropdown.Toggle variant="transparent" id="dropdown-more-options">
             <small>{selectedOptions.bestAmmenity || 'Most Important Ammenity'}</small>
@@ -129,7 +129,7 @@ const GroupedDropdown: React.FC<GroupedDropdownProps> = ({
           </Dropdown.Menu>
         </Dropdown>
       </Col>
-      <Col xs={6}>
+      <Col xs={6} lg={3}>
         <Dropdown>
           <Dropdown.Toggle variant="transparent" id="dropdown-more-options">
             <small> {selectedOptions.otherAmmenity || 'Other Ammenity'}</small>

@@ -3,23 +3,23 @@ import { InputGroup, FormControl, Tooltip, OverlayTrigger, Button } from 'react-
 import { useNavigate} from 'react-router-dom';
 
 const options = [
-  { label: 'Sell', route: '/sell' },
-  { label: 'Buy', route: '/buy' },
-  { label: 'Rent', route: '/rent' },
-  { label: 'Lease', route: '/lease' },
+  { label: 'Sell', route: '/dashboard' },
+  { label: 'Buy', route: '/building/sale' },
+  { label: 'Rent', route: '/building/rent' },
+  { label: 'Lease', route: '/dashboard' },
 ];
 
 const HomeSearchBar: React.FC = () => {
   const [showTooltip, setShowTooltip] = useState(false);
   const navigate = useNavigate();
 
-  const handleOptionClick = (route: string) => {
+  const handleOptionClick = (route: string):any => {
     navigate(route)
   };
 
   const renderTooltip = (props: any) => (
-    <Tooltip id="options-tooltip" {...props}>
-      <div className="d-flex flex-column">
+    <Tooltip className='bg-light' id="options-tooltip" {...props}>
+      <div className="d-flex flex-column bg-light">
         {options.map((option) => (
           <Button
             key={option.label}
@@ -42,7 +42,7 @@ const HomeSearchBar: React.FC = () => {
         overlay={renderTooltip}
       >
         <FormControl
-          placeholder="Search..."
+          placeholder="What do you want to do?"
           onFocus={() => setShowTooltip(true)}
           onBlur={() => setShowTooltip(false)}
         />
